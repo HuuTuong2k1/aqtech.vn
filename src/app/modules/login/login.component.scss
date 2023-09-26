@@ -1,0 +1,32 @@
+.login-container {
+  background-image: url('../../../assets/images/bg-2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+
+  .login-row {
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+
+    .login-col {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 30px 30px 60px 30px;
+      border-radius: 10px;
+
+      .logo-Loginform {
+        text-align: center;
+      }
+
+      input {
+        line-height: 2.3;
+      }
+
+      .btn-login {
+        height: 40px;
+      }
+    }
+
+  }
+
+}

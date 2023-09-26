@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+.logo-aq {
+  padding: 0px 20px 20px 20px;
+  text-align: center;
+  border-bottom: solid 1px #9d9999;
+}
+
+.item-sidebar {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: 15px;
+
+  &:hover {
+    cursor: pointer;
+    color: $main-color;
+  }
+
+  .item-name {
+    font-size: medium;
+    font-weight: 400;
+  }
+}
+
+.item-sidebar {
+  &.active {
+    color: $main-color;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

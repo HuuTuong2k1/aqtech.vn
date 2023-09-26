@@ -1,0 +1,57 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-drawer-side {
+  border: none;
+}
+
+.sidebar {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 250px;
+  padding: 20px;
+}
+
+.content-outlet {
+  position: relative;
+  min-height: 100vh;
+  margin-top: 10px;
+}
+
+.sidenav-content {
+  margin: 0 10px;
+  overflow: hidden;
+
+  .header {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    .header-left {
+
+      .search {
+        margin-top: 15px;
+      }
+    }
+
+    .header-right {
+
+      .btn-admin {
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  .footer {
+    background-color: #ffff;
+    text-align: center;
+    padding: 15px;
+    bottom: 0;
+  }
+}
+
+::ng-deep .dropdown-admin {
+  margin-top: 15px;
+}
+

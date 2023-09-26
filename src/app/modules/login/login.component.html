@@ -1,0 +1,18 @@
+<div class="container-fluid login-container">
+  <div class="row login-row">
+    <div class="col-4 login-col">
+      <form [formGroup]="form" (ngSubmit)="loginSubmit()">
+        <div class="mb-3 logo-Loginform">
+          <img width="50%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
+        </div>
+        <div class="mb-3">
+          <input type="text" formControlName="username" class="form-control ps-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tên đăng nhập">
+        </div>
+        <div class="mb-3">
+          <input type="password" formControlName="password" class="form-control ps-3" id="exampleInputPassword1" placeholder="Mật khẩu">
+        </div>
+        <button type="submit" class="btn btn-success btn-login w-100">Đăng nhập</button>
+      </form>
+    </div>
+  </div>
+</div>

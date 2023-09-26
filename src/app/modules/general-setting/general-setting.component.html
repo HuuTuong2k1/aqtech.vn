@@ -1,0 +1,134 @@
+<div class="container-fluid p-0">
+  <!-- header breadcrumb -->
+  <div class="row">
+    <div class="col">
+      <app-header-content></app-header-content>
+    </div>
+  </div>
+  <!-- /header breadcrumb -->
+
+  <!-- Form thiết lập chung -->
+  <div class="row general-settings-form-contain">
+    <div class="col">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col">
+            <div class="form-header">
+              Thiết lập chung
+            </div>
+          </div>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="submitForm()" class="container-fluid general-settings-form">
+          <div class="row">
+            <div class="col-6">
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Website</label>
+                <div class="col-sm-9">
+                  <input formControlName="namewebsite" type="email" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Logo</label>
+                <div class="col-sm-9">
+                  <input formControlName="logo" class="form-control" id="formFileSm" type="file">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label align-self-center">Theme</label>
+                <div class="col-sm-9 d-flex align-items-center gap-5">
+                  <mat-icon [style.color]="color"> format_color_fill</mat-icon>
+                  <input type="text" formControlName="theme" class="form-control theme" [(colorPicker)]="color" [style.background]="color"/>
+                  <span class="hex">
+                    Mã HEX: <p [style.color]="color" class="m-0">{{color}}</p>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-9">
+                  <input formControlName="title" type="text" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Favicon Icon</label>
+                <div class="col-sm-9">
+                  <input formControlName="favicon" class="form-control" id="formFileSm" type="file">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-main float-end d-flex gap-2">
+                <mat-icon>save_alt</mat-icon>
+                Lưu thay đổi
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- / Form thiết lập chung -->
+
+  <!-- Enable/Unenable element html -->
+  <div class="row enable-table mt-4">
+    <div class="col">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col">
+            <div class="form-header">
+              Thông tin trang chủ
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Khu vực</th>
+                  <th scope="col">Ẩn/Hiện</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of first_enable_items, let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item}}</td>
+                  <td>
+                    <mat-slide-toggle [checked]="true"></mat-slide-toggle>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-6">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Khu vực</th>
+                  <th scope="col">Ẩn/Hiện</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of second_enable_items, let i = index">
+                  <th scope="row">{{i + 1 + first_enable_items.length}}</th>
+                  <td>{{item}}</td>
+                  <td>
+                    <mat-slide-toggle [checked]="true"></mat-slide-toggle>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / Enable/Unenable element html -->
+</div>
+
