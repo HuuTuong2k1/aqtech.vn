@@ -2,4 +2,60 @@
   <div class="row">
     <app-header-content></app-header-content>
   </div>
+  <div class="row header-contain">
+    <div class="col">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col">
+            <div class="form-header">
+              <span>
+                Quản lý header
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col d-flex justify-content-end">
+            <button class="btn btn-add-header d-flex" (click)="openForm()">
+              Thêm
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col">
+            <table class="table table-header">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th width="20%" scope="col">Tên</th>
+                  <th width="20%" scope="col">Danh mục cha</th>
+                  <th width="20%" scope="col">Link</th>
+                  <th class="text-center" scope="col">Ẩn/Hiện</th>
+                  <th class="text-center" scope="col">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data, let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.parent}}</td>
+                  <td>{{item.link}}</td>
+                  <td class="text-center">
+                    <mat-slide-toggle [checked]="item.status"></mat-slide-toggle>
+                  </td>
+                  <td class="justify-content-center d-flex gap-3">
+                    <mat-icon (click)="openDialog(item)">edit</mat-icon>
+                    <mat-icon>delete</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

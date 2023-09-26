@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-general-setting',
@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 })
 export class GeneralSettingComponent implements OnInit{
   color: string = '#009047'
+  checked: boolean = true
   form!: FormGroup
   enable_items: string[] = [
     'Banner',
@@ -31,7 +32,8 @@ export class GeneralSettingComponent implements OnInit{
       logo : ['', Validators.required],
       theme : ['', Validators.required],
       title : ['', Validators.required],
-      favicon: ['', Validators.required]
+      favicon: ['', Validators.required],
+      status: ['', Validators.required]
     })
   }
 
@@ -43,6 +45,7 @@ export class GeneralSettingComponent implements OnInit{
 
   submitForm() {
     this.form.value['theme'] = this.color
+    this.form.value['status'] = this.checked
     console.log(this.form.value)
   }
 }

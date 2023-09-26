@@ -1,0 +1,17 @@
+$main-color: #009047;
+$ffff: #ffff;
+
+.header-contain {
+
+  .table-header {
+
+    mat-icon {
+      color: $main-color;
+    }
+  }
+
+  .btn-add-header {
+    background-color: $main-color;
+    color: $ffff;
+  }
+}

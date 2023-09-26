@@ -30,6 +30,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { HeaderContentComponent } from './modules/header-content/header-content.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FormHeaderComponent } from './modules/form-header/form-header.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     DownloadComponent,
     LoginComponent,
     HeaderContentComponent,
+    FormHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReactiveFormsModule,
     ColorPickerModule,
     MatSlideToggleModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
