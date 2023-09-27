@@ -83,6 +83,7 @@ export class HeaderComponent implements OnInit, AfterViewInit{
   ]
 
   Columns: string[] = [
+    '#',
     'Tên',
     'Danh mục cha',
     'Link',

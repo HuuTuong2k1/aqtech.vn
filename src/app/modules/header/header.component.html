@@ -29,6 +29,11 @@
             </div>
             <div class="mat-elevation-z8">
               <table mat-table [dataSource]="dataTable">
+                <ng-container matColumnDef="#">
+                  <th mat-header-cell *matHeaderCellDef>No.</th>
+                  <td mat-cell *matCellDef="let row, let i = index">{{ i + 1 }}</td>
+                </ng-container>
+
                 <ng-container matColumnDef="Tên">
                   <th mat-header-cell *matHeaderCellDef> Tên </th>
                   <td mat-cell *matCellDef="let row"> {{row.name}} </td>
