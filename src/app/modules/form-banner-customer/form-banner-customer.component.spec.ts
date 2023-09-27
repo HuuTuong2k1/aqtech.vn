@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormBannerComponent } from './form-banner.component';
+import { FormBannerCustomerComponent } from './form-banner-customer.component';
 
 describe('FormBannerComponent', () => {
-  let component: FormBannerComponent;
-  let fixture: ComponentFixture<FormBannerComponent>;
+  let component: FormBannerCustomerComponent;
+  let fixture: ComponentFixture<FormBannerCustomerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FormBannerComponent]
+      declarations: [FormBannerCustomerComponent]
     });
-    fixture = TestBed.createComponent(FormBannerComponent);
+    fixture = TestBed.createComponent(FormBannerCustomerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

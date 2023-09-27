@@ -38,7 +38,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBannerComponent } from './modules/form-banner/form-banner.component';
+import { FormBannerCustomerComponent } from './modules/form-banner-customer/form-banner-customer.component';
+import { FormPartnerComponent } from './modules/form-partner/form-partner.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { FormBannerComponent } from './modules/form-banner/form-banner.component
     HeaderContentComponent,
     FormHeaderComponent,
     ConfirmDeleteComponent,
-    FormBannerComponent,
+    FormBannerCustomerComponent,
+    FormPartnerComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBannerComponent } from '../form-banner/form-banner.component';
+import { FormBannerCustomerComponent } from '../form-banner-customer/form-banner-customer.component';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 import { Banner } from 'src/app/interfaces/banner';
 import { MatTableDataSource } from '@angular/material/table';
@@ -103,7 +103,7 @@ export class BannerComponent implements AfterViewInit{
   }
 
   openDialogEdit(data: any) {
-    this.dialog.open(FormBannerComponent, {
+    this.dialog.open(FormBannerCustomerComponent, {
       data: data
     })
   }

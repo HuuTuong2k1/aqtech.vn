@@ -1,7 +1,7 @@
-<form class="form-add-banner" [formGroup]="form" (ngSubmit)="updateBanner()">
+<form class="form-add-banner" [formGroup]="form" (ngSubmit)="data ? updateBanner() : AddBanner()">
   <div class="mb-3">
     <header>
-      {{data ? "Chỉnh sửa Header" : "Thêm mới header"}}
+      {{data ? "Chỉnh sửa" : "Thêm mới"}}
     </header>
   </div>
   <div class="mb-3">
@@ -9,7 +9,7 @@
     <input formControlName="image" class="form-control" type="file">
   </div>
   <div class="mb-3 d-flex" *ngIf="data && data.image != ''">
-    <img width="50%" src="{{data.image}}" alt="">
+    <img width="20%" src="{{data.image}}" alt="">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Mô tả</label>
