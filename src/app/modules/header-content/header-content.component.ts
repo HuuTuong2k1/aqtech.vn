@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { FormHeaderComponent } from '../form-header/form-header.component';
 
 @Component({
   selector: 'app-header-content',
@@ -11,7 +13,8 @@ export class HeaderContentComponent implements OnInit{
   breadcrumb: string = ''
 
   constructor(
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) {
 
   }
@@ -23,5 +26,9 @@ export class HeaderContentComponent implements OnInit{
       routeData['name'] ? this.title = routeData['name'] : this.title = ''
       routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
     }
+  }
+
+  openFormAddHeader() {
+    this.dialog.open(FormHeaderComponent)
   }
 }

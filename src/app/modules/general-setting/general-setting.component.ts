@@ -33,7 +33,7 @@ export class GeneralSettingComponent implements OnInit{
       theme : ['', Validators.required],
       title : ['', Validators.required],
       favicon: ['', Validators.required],
-      status: ['', Validators.required]
+      status: [this.checked, Validators.required]
     })
   }
 
@@ -43,9 +43,17 @@ export class GeneralSettingComponent implements OnInit{
 
   }
 
+  changeStatus(event: any) {
+    // Lấy giá trị checked từ sự kiện thay đổi
+    const isChecked = event.checked;
+
+    // Cập nhật giá trị của trường 'status' trong FormGroup
+    this.form.patchValue({ status: isChecked });
+  }
+
   submitForm() {
     this.form.value['theme'] = this.color
-    this.form.value['status'] = this.checked
     console.log(this.form.value)
   }
+
 }

@@ -20,7 +20,7 @@ import { BannerComponent } from './modules/banner/banner.component';
 import { PartnerComponent } from './modules/partner/partner.component';
 import { CustomerComponent } from './modules/customer/customer.component';
 import { NewsComponent } from './modules/news/news.component';
-import { CommnentsComponent } from './modules/commnents/commnents.component';
+import { CommentsComponent } from './modules/comments/commnents.component';
 import { ProductComponent } from './modules/product/product.component';
 import { AccountComponent } from './modules/account/account.component';
 import { DownloadComponent } from './modules/download/download.component';
@@ -29,9 +29,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HeaderContentComponent } from './modules/header-content/header-content.component';
 import { ColorPickerModule } from 'ngx-color-picker';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormHeaderComponent } from './modules/form-header/form-header.component';
+import { ConfirmDeleteComponent } from './modules/confirm-delete/confirm-delete.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -45,13 +51,14 @@ import { FormHeaderComponent } from './modules/form-header/form-header.component
     PartnerComponent,
     CustomerComponent,
     NewsComponent,
-    CommnentsComponent,
+    CommentsComponent,
     ProductComponent,
     AccountComponent,
     DownloadComponent,
     LoginComponent,
     HeaderContentComponent,
     FormHeaderComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +75,11 @@ import { FormHeaderComponent } from './modules/form-header/form-header.component
     ColorPickerModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

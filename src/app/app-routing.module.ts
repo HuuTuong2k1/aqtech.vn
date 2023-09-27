@@ -8,7 +8,7 @@ import { BannerComponent } from './modules/banner/banner.component';
 import { PartnerComponent } from './modules/partner/partner.component';
 import { CustomerComponent } from './modules/customer/customer.component';
 import { NewsComponent } from './modules/news/news.component';
-import { CommnentsComponent } from './modules/commnents/commnents.component';
+import { CommentsComponent } from './modules/comments/commnents.component';
 import { ProductComponent } from './modules/product/product.component';
 import { AccountComponent } from './modules/account/account.component';
 import { DownloadComponent } from './modules/download/download.component';
@@ -46,7 +46,7 @@ const routes: Routes = [
         path: 'bai-viet', component: NewsComponent, data: {name: 'Bài viết', breadcrumb: 'Admin > Bài viết'}
       },
       {
-        path: 'binh-luan', component: CommnentsComponent, data: {name: 'Bình luận', breadcrumb: 'Admin > Bình luận'}
+        path: 'binh-luan', component: CommentsComponent, data: {name: 'Bình luận', breadcrumb: 'Admin > Bình luận'}
       },
       {
         path: 'san-pham', component: ProductComponent, data: {name: 'Sản phẩm', breadcrumb : 'Admin > Sản phẩm'}

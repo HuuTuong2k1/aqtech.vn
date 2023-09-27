@@ -1,4 +1,4 @@
-<form class="form-add-header" [formGroup]="form" (ngSubmit)="submitForm()">
+<form class="form-add-header" [formGroup]="form" (ngSubmit)="updateHeader()">
   <div class="mb-3">
     <header>
       {{data ? "Chỉnh sửa Header" : "Thêm mới header"}}
@@ -11,12 +11,11 @@
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Danh mục cha</label>
     <select class="form-select" aria-label="Default select example" formControlName="parent">
-      <!-- chưa fix bug -->
-      <option>--Chọn danh mục cha--</option>
-      <option>Home</option>
-      <option>Product</option>
-      <option>About Us</option>
-      <option>Contact Us</option>
+      <option value="">--Chọn danh mục cha--</option>
+      <option value="Home">Home</option>
+      <option value="Product">Product</option>
+      <option value="About-Us">About Us</option>
+      <option value="Contact-Us">Contact Us</option>
     </select>
   </div>
   <div class="mb-3">
@@ -33,6 +32,6 @@
     <button type="submit" class="btn btn-success">
       {{data ? "Cập nhật" : "Thêm mới"}}
     </button>
-    <button type="cancle" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
   </div>
 </form>

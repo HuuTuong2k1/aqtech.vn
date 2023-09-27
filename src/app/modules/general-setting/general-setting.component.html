@@ -24,13 +24,23 @@
               <div class="row mb-4">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Website</label>
                 <div class="col-sm-9">
-                  <input formControlName="namewebsite" type="email" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
+                  <input formControlName="namewebsite" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
                 </div>
               </div>
-              <div class="row mb-4">
+              <div class="row mb-2">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Logo</label>
                 <div class="col-sm-9">
                   <input formControlName="logo" class="form-control" id="formFileSm" type="file">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
+                </div>
+                <label for="inputEmail3" class="col-sm-3 col-form-label text-end">Trạng thái</label>
+                <div class="col-sm-3 align-self-center">
+                  <mat-slide-toggle formControlName="status" (change)="changeStatus($event)"></mat-slide-toggle>
                 </div>
               </div>
               <div class="row mb-4">
@@ -51,16 +61,16 @@
                   <input formControlName="title" type="text" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
                 </div>
               </div>
-              <div class="row mb-4">
+              <div class="row mb-2">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Favicon Icon</label>
                 <div class="col-sm-9">
                   <input formControlName="favicon" class="form-control" id="formFileSm" type="file">
                 </div>
               </div>
               <div class="row mb-4">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
-                <div class="col-sm-9 align-self-center">
-                  <mat-slide-toggle [checked]="checked" formControlName="status"></mat-slide-toggle>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-header',
@@ -14,7 +15,8 @@ export class FormHeaderComponent implements OnInit{
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<FormHeaderComponent>,
-    private formfb: FormBuilder
+    private formfb: FormBuilder,
+    private toast: ToastrService
   ){}
 
   ngOnInit(): void {
@@ -24,15 +26,18 @@ export class FormHeaderComponent implements OnInit{
       link: [this.data ? this.data.link : '', Validators.required],
       status: [this.data ? this.data.status : this.checked, Validators.required]
     })
-
-    console.log(this.data)
   }
 
   closeDialog() {
     this.dialogRef.close()
   }
 
-  submitForm() {
+  updateHeader() {
     console.log(this.form.value)
+    try {
+      this.toast.success('Cập nhật thành công', 'Successfully')
+    } catch (Error) {
+      this.toast.error('Cập nhật không thành công', 'Unsuccessfully')
+    }
   }
 }
