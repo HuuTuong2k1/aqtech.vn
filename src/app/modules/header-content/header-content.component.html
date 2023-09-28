@@ -5,6 +5,7 @@
         <span class="title">{{title}}</span>
         <span class="site-map-current">{{breadcrumb}}</span>
       </div>
+      <!-- hiện thị nút thêm ứng với từng form thích hợp với sidebar -->
       <button *ngIf="title === 'Header'" class="btn btn-add-header d-flex" (click)="openFormAddHeader()">
         Thêm
         <mat-icon>add</mat-icon>
@@ -13,6 +14,7 @@
         Thêm
         <mat-icon>add</mat-icon>
       </button>
+      <!--/hiện thị nút thêm ứng với từng form thích hợp với sidebar -->
     </div>
   </div>
 </div>
