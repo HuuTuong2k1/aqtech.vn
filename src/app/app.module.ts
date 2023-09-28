@@ -38,6 +38,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBannerCustomerComponent } from './modules/form-banner-customer/form-banner-customer.component';
+import { FormAccountComponent } from './modules/form-account/form-account.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { FormBannerCustomerComponent } from './modules/form-banner-customer/form
     FormHeaderComponent,
     ConfirmDeleteComponent,
     FormBannerCustomerComponent,
+    FormAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { FormBannerCustomerComponent } from './modules/form-banner-customer/form
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    MatRadioModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

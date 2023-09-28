@@ -1,0 +1,54 @@
+<form class="form-add-account" [formGroup]="form" (ngSubmit)="updateAccount()">
+  <div class="mb-3">
+    <header>
+      {{data ? "Chỉnh sửa" : "Thêm mới"}}
+    </header>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Tên đầy đủ</label>
+    <input type="text" class="form-control" formControlName="fullname">
+  </div>
+
+  <div>
+    <label class="form-label me-4">Giới tính</label>
+    <mat-radio-group aria-label="Select an option" formControlName="sex">
+      <mat-radio-button value="true">Nam</mat-radio-button>
+      <mat-radio-button value="false">Nữ</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Số Điện thoại</label>
+    <input type="text" class="form-control" formControlName="phone">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Mật khẩu</label>
+    <input type="password" class="form-control" formControlName="pass">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Nhập lại mật khẩu</label>
+    <input type="password" class="form-control" formControlName="cfpass">
+  </div>
+
+  <div class="row mb-3">
+    <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
+    <div class="col-sm-9 align-self-center">
+      <mat-slide-toggle formControlName="status"></mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2 justify-content-end">
+    <button type="submit" class="btn btn-success">
+      {{data ? "Cập nhật" : "Thêm mới"}}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+  </div>
+</form>

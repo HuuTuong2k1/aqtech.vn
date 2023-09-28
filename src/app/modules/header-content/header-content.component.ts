@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FormHeaderComponent } from '../form-header/form-header.component';
 import { FormBannerCustomerComponent } from '../form-banner-customer/form-banner-customer.component';
+import { FormAccountComponent } from '../form-account/form-account.component';
 
 @Component({
   selector: 'app-header-content',
@@ -35,5 +36,9 @@ export class HeaderContentComponent implements OnInit{
 
   openFormAddBannerAndCustomer() {
     this.dialog.open(FormBannerCustomerComponent)
+  }
+
+  openFormAddAccount() {
+    this.dialog.open(FormAccountComponent)
   }
 }
