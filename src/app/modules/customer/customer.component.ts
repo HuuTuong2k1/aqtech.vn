@@ -20,10 +20,40 @@ export class CustomerComponent implements AfterViewInit{
       status: true
     },
     {
+      image: 'assets/images/TVU.png',
+      description: 'Đại học Trà Vinh',
+      link: 'assets/images/TVU.png',
+      status: true
+    },
+    {
+      image: 'assets/images/van_lang.png',
+      description: 'Đại học Văn Lang',
+      link: 'assets/images/van_lang.png',
+      status: false
+    },
+    {
+      image: 'assets/images/ctu.png',
+      description: 'Đại học Cần Thơ',
+      link: 'assets/images/ctu.png',
+      status: true
+    },
+    {
       image: 'assets/images/BK.png',
       description: 'Đại học bách khoa',
       link: 'assets/images/BK.png',
+      status: false
+    },
+    {
+      image: 'assets/images/VMU.png',
+      description: 'Đại học y khoa Vinh',
+      link: 'assets/images/VMU.png',
       status: true
+    },
+    {
+      image: 'assets/images/yersin.png',
+      description: 'Đại học Yersin',
+      link: 'assets/images/yersin.png',
+      status: false
     },
     {
       image: 'assets/images/BK.png',
@@ -32,45 +62,15 @@ export class CustomerComponent implements AfterViewInit{
       status: true
     },
     {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
+      image: 'assets/images/SGU.png',
+      description: 'Đại học Sài Gòn',
+      link: 'assets/images/SGU.png',
       status: true
     },
     {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
-      status: true
-    },
-    {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
-      status: true
-    },
-    {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
-      status: true
-    },
-    {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
-      status: true
-    },
-    {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
-      status: true
-    },
-    {
-      image: 'assets/images/BK.png',
-      description: 'Đại học bách khoa',
-      link: 'assets/images/BK.png',
+      image: 'assets/images/ngoai_thuong.png',
+      description: 'Đại học ngoại thương',
+      link: 'assets/images/ngoai_thuong.png',
       status: true
     },
     {
@@ -107,7 +107,6 @@ export class CustomerComponent implements AfterViewInit{
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataTable.filter = filterValue.trim().toLowerCase();
-
     if (this.dataTable.paginator) {
       this.dataTable.paginator.firstPage();
     }
@@ -124,4 +123,5 @@ export class CustomerComponent implements AfterViewInit{
       data: data
     })
   }
+
 }

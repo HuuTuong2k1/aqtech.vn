@@ -1,4 +1,5 @@
-@import '../../../styles.scss';
+// @import '../../../styles.scss';
+$main-color: #009047;
 
 .breadcrumb {
   background-color: #ffff;
@@ -25,7 +26,7 @@
 
     .btn-add-header {
       background-color: $main-color;
-      color: $ffff;
+      color: #ffff;
 
       &:hover {
         opacity: 0.9;

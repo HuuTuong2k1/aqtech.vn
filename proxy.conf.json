@@ -1,0 +1,8 @@
+{
+  "/api/**": {
+    "target": "https://sp.aqtech.edu.vn/release_portal.netweb",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

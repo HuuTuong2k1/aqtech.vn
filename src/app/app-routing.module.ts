@@ -5,7 +5,6 @@ import { GeneralSettingComponent } from './modules/general-setting/general-setti
 import { HeaderComponent } from './modules/header/header.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { BannerComponent } from './modules/banner/banner.component';
-import { PartnerComponent } from './modules/partner/partner.component';
 import { CustomerComponent } from './modules/customer/customer.component';
 import { NewsComponent } from './modules/news/news.component';
 import { CommentsComponent } from './modules/comments/commnents.component';
@@ -37,7 +36,7 @@ const routes: Routes = [
         path: 'banner', component: BannerComponent, data: {name: 'Banner', breadcrumb: 'Admin > Banner'}
       },
       {
-        path: 'doi-tac', component: PartnerComponent, data: {name: 'Đối tác', breadcrumb: 'Admin > Đối tác'}
+        path: 'doi-tac', component: CustomerComponent, data: {name: 'Đối tác', breadcrumb: 'Admin > Đối tác'}
       },
       {
         path: 'khach-hang', component: CustomerComponent, data: {name: 'Khách hàng', breadcrumb: 'Admin > Khách hàng'}

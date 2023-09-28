@@ -17,7 +17,6 @@ import { GeneralSettingComponent } from './modules/general-setting/general-setti
 import { HeaderComponent } from './modules/header/header.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { BannerComponent } from './modules/banner/banner.component';
-import { PartnerComponent } from './modules/partner/partner.component';
 import { CustomerComponent } from './modules/customer/customer.component';
 import { NewsComponent } from './modules/news/news.component';
 import { CommentsComponent } from './modules/comments/commnents.component';
@@ -39,7 +38,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBannerCustomerComponent } from './modules/form-banner-customer/form-banner-customer.component';
-import { FormPartnerComponent } from './modules/form-partner/form-partner.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +48,6 @@ import { FormPartnerComponent } from './modules/form-partner/form-partner.compon
     HeaderComponent,
     FooterComponent,
     BannerComponent,
-    PartnerComponent,
     CustomerComponent,
     NewsComponent,
     CommentsComponent,
@@ -62,7 +59,6 @@ import { FormPartnerComponent } from './modules/form-partner/form-partner.compon
     FormHeaderComponent,
     ConfirmDeleteComponent,
     FormBannerCustomerComponent,
-    FormPartnerComponent,
   ],
   imports: [
     BrowserModule,
