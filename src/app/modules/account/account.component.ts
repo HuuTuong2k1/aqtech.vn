@@ -23,7 +23,7 @@ export class AccountComponent implements AfterViewInit{
       status: true
     },
     {
-      fullname: "Nguyễn Hữu Tường",
+      fullname: "Nguyễn Hữu Long",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
       sex: true,

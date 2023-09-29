@@ -7,15 +7,15 @@
       </div>
       <!-- hiện thị nút thêm ứng với từng form thích hợp với sidebar -->
       <button *ngIf="title === 'Header'" class="btn btn-add-header d-flex" (click)="openFormAddHeader()">
-        Thêm
+        Thêm mới
         <mat-icon>add</mat-icon>
       </button>
       <button *ngIf="title === 'Banner' || title === 'Khách hàng' || title === 'Đối tác'" class="btn btn-add-header d-flex" (click)="openFormAddBannerAndCustomer()">
-        Thêm
+        Thêm mới
         <mat-icon>add</mat-icon>
       </button>
       <button *ngIf="title === 'Tài khoản khách hàng'" class="btn btn-add-header d-flex" (click)="openFormAddAccount()">
-        Thêm
+        Thêm mới
         <mat-icon>add</mat-icon>
       </button>
       <!--/hiện thị nút thêm ứng với từng form thích hợp với sidebar -->
