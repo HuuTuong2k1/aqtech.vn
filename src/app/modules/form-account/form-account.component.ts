@@ -13,6 +13,12 @@ export class FormAccountComponent implements OnInit{
   check: boolean = true
   form!: FormGroup
   required: boolean = true
+  isEmptyEmail: boolean = true
+  isEmptyFullName: boolean = true
+  isEmptyPhone: boolean = true
+  isEmptySex: boolean = true
+  isEmptyPass: boolean = true
+  isEmptyCFPass: boolean = true
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,12 +29,12 @@ export class FormAccountComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.formfb.group({
-      email: [this.data ? this.data.email : null, Validators.required],
-      fullname: [this.data ? this.data.fullname : null, Validators.required],
-      phone: [this.data ? this.data.phone : null, Validators.required],
-      sex: [this.data ? this.data.sex.toString() : null, Validators.required],
-      pass: [this.data ? this.data.pass : null, Validators.required],
-      cfpass: ['', Validators.required],
+      email: [this.data ? this.data.email : '', Validators.required],
+      fullname: [this.data ? this.data.fullname : '', Validators.required],
+      phone: [this.data ? this.data.phone : '', Validators.required],
+      sex: [this.data ? this.data.sex.toString() : '', Validators.required],
+      pass: [this.data ? this.data.pass : '', Validators.required],
+      cfpass:[this.data ? this.data.pass : '', Validators.required],
       status: [this.data ? this.data.status : false]
     })
   }
@@ -42,9 +48,9 @@ export class FormAccountComponent implements OnInit{
       this.checkPass(this.form.value.pass, this.form.value.cfpass) ?
       this.toast.success('Tạo tài khoản thành công', 'Successfully') :
       this.toast.error(this.massage, 'Error')
+    } else {
+      this.checkRequied(this.form)
     }
-    console.log(this.form.value)
-    // chuyển sex thành kiểu boolean trước khi gửi về backend
   }
 
   checkPass(pass: string, confirmPass: string): boolean {
@@ -61,6 +67,17 @@ export class FormAccountComponent implements OnInit{
   }
 
   checkRequied (data: any) {
-    
+    data.value.email == '' ? this.massage = 'Bạn chưa nhập Email' : ''
+    this.toast.error(this.massage, 'Error !')
+    data.value.fullname == '' ? this.massage = 'Bạn chưa nhập tên đầy đủ' : ''
+    this.toast.error(this.massage, 'Error !')
+    data.value.phone == '' ? this.massage = 'Bạn chưa nhập số điện thoại' : ''
+    this.toast.error(this.massage, 'Error !')
+    data.value.sex == '' ? this.massage = 'Bạn chưa chọn giới tính' : ''
+    this.toast.error(this.massage, 'Error !')
+    data.value.pass == '' ? this.massage = 'Bạn chưa nhập mật khẩu' : ''
+    this.toast.error(this.massage, 'Error !')
+    data.value.cfpass == '' ? this.massage = 'Bạn chưa nhập lại mật khẩu' : ''
+    this.toast.error(this.massage, 'Error !')
   }
 }
