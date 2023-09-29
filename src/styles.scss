@@ -21,3 +21,7 @@ $ffff: #ffff;
 .form-header {
   @include form-header()
 }
+
+.required {
+  color: red;
+}

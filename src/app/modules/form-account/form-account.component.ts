@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-account',
@@ -39,8 +38,13 @@ export class FormAccountComponent implements OnInit{
   }
 
   updateAccount() {
-    this.checkPass(this.form.value.pass, this.form.value.cfpass) ? this.toast.success('Tạo tài khoản thành công', 'Successfully') : this.toast.error(this.massage, 'Error')
-    // chuyển sex thành kiểu boolean trước khi boolean trước khi gửi về backend
+    if (this.form.valid) {
+      this.checkPass(this.form.value.pass, this.form.value.cfpass) ?
+      this.toast.success('Tạo tài khoản thành công', 'Successfully') :
+      this.toast.error(this.massage, 'Error')
+    }
+    console.log(this.form.value)
+    // chuyển sex thành kiểu boolean trước khi gửi về backend
   }
 
   checkPass(pass: string, confirmPass: string): boolean {
@@ -54,5 +58,9 @@ export class FormAccountComponent implements OnInit{
       this.check = true
     }
     return this.check
+  }
+
+  checkRequied (data: any) {
+    
   }
 }
