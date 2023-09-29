@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./form-account.component.scss']
 })
 export class FormAccountComponent implements OnInit{
-  massage!: string
   check: boolean = true
   form!: FormGroup
   required: boolean = true
@@ -35,7 +34,7 @@ export class FormAccountComponent implements OnInit{
       sex: [this.data ? this.data.sex.toString() : '', Validators.required],
       pass: [this.data ? this.data.pass : '', Validators.required],
       cfpass:[this.data ? this.data.pass : '', Validators.required],
-      status: [this.data ? this.data.status : false]
+      status: [this.data ? this.data.status : true]
     })
   }
 
@@ -45,9 +44,8 @@ export class FormAccountComponent implements OnInit{
 
   updateAccount() {
     if (this.form.valid) {
-      this.checkPass(this.form.value.pass, this.form.value.cfpass) ?
-      this.toast.success('Tạo tài khoản thành công', 'Successfully') :
-      this.toast.error(this.massage, 'Error')
+      const check = this.checkPass(this.form.value.pass, this.form.value.cfpass)
+      check ? this.toast.success('Tạo tài khoản thành công','Successfully !') : ''
     } else {
       this.checkRequied(this.form)
     }
@@ -56,10 +54,10 @@ export class FormAccountComponent implements OnInit{
   checkPass(pass: string, confirmPass: string): boolean {
     if (pass.length < 8) {
       this.check = false
-      this.massage = 'Mật khẩu phải có ít nhất 8 ký tự'
+      this.toast.error('Mật khẩu phải có ít nhất 8 ký tự', 'Erorr !')
     } else if (pass != confirmPass) {
       this.check = false
-      this.massage = 'Nhập lại mật khẩu không trùng khớp'
+      this.toast.error('Nhập lại mật khẩu không trùng khớp', 'Erorr !')
     } else {
       this.check = true
     }
@@ -67,17 +65,11 @@ export class FormAccountComponent implements OnInit{
   }
 
   checkRequied (data: any) {
-    data.value.email == '' ? this.massage = 'Bạn chưa nhập Email' : ''
-    this.toast.error(this.massage, 'Error !')
-    data.value.fullname == '' ? this.massage = 'Bạn chưa nhập tên đầy đủ' : ''
-    this.toast.error(this.massage, 'Error !')
-    data.value.phone == '' ? this.massage = 'Bạn chưa nhập số điện thoại' : ''
-    this.toast.error(this.massage, 'Error !')
-    data.value.sex == '' ? this.massage = 'Bạn chưa chọn giới tính' : ''
-    this.toast.error(this.massage, 'Error !')
-    data.value.pass == '' ? this.massage = 'Bạn chưa nhập mật khẩu' : ''
-    this.toast.error(this.massage, 'Error !')
-    data.value.cfpass == '' ? this.massage = 'Bạn chưa nhập lại mật khẩu' : ''
-    this.toast.error(this.massage, 'Error !')
+    data.value.email == '' ? this.toast.error('Bạn chưa nhập Email', 'Error !') : ''
+    data.value.fullname == '' ? this.toast.error('Bạn chưa nhập tên đầy đủ', 'Error !') : ''
+    data.value.phone == '' ? this.toast.error('Bạn chưa nhập số điện thoại', 'Error !') : ''
+    data.value.sex == '' ? this.toast.error('Bạn chưa chọn giới tính', 'Error !') : ''
+    data.value.pass == '' ? this.toast.error('Bạn chưa nhập mật khẩu', 'Error !') : ''
+    data.value.cfpass == '' ? this.toast.error('Bạn chưa nhập lại mật khẩu', 'Error !') : ''
   }
 }
