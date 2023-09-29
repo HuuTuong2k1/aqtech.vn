@@ -25,3 +25,14 @@ $ffff: #ffff;
 .required {
   color: red;
 }
+
+label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+input {
+  &::placeholder {
+    font-size: 13px;
+  }
+}
