@@ -2,7 +2,7 @@ export interface Account {
   fullname: string,
   email: string,
   phone: string,
-  sex: boolean,
+  sex: string,
   status: boolean,
   pass: string
 }

@@ -18,7 +18,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Nguyễn Hữu Tường",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: true
     },
@@ -26,7 +26,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Nguyễn Hữu Long",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: false
     },
@@ -34,7 +34,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Nguyễn Hữu Thịnh",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: true
     },
@@ -42,7 +42,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Phạm Minh Lâm",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: false
     },
@@ -50,7 +50,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Nguyễn Thị Kim Tuyến",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: false,
+      sex: 'Nữ',
       pass: '1234',
       status: true
     },
@@ -58,7 +58,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Lê Trường An",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: true
     },
@@ -66,7 +66,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Dương Hữu Khanh",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: false
     },
@@ -74,7 +74,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Nguyễn Hoàng Trung",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: 'Nam',
       pass: '1234',
       status: true
     },
@@ -82,7 +82,7 @@ export class AccountComponent implements AfterViewInit{
       fullname: "Nguyễn Vũ Phương",
       email: "nhtuong2001@gmail.com",
       phone: "0939566579",
-      sex: true,
+      sex: '',
       pass: '1234',
       status: true
     },

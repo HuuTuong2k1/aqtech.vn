@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './form-account.component.html',
   styleUrls: ['./form-account.component.scss']
 })
+
 export class FormAccountComponent implements OnInit{
   check: boolean = true
   form!: FormGroup
@@ -18,6 +19,9 @@ export class FormAccountComponent implements OnInit{
   isEmptySex: boolean = true
   isEmptyPass: boolean = true
   isEmptyCFPass: boolean = true
+  hidePass: boolean = true
+  hideCFPass: boolean = true
+  isSubmit: boolean = false
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,10 +32,10 @@ export class FormAccountComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.formfb.group({
-      email: [this.data ? this.data.email : '', Validators.required],
+      email: [this.data ? this.data.email : '', [Validators.required, Validators.email]],
       fullname: [this.data ? this.data.fullname : '', Validators.required],
       phone: [this.data ? this.data.phone : '', Validators.required],
-      sex: [this.data ? this.data.sex.toString() : '', Validators.required],
+      sex: [this.data ? this.data.sex : ''],
       pass: [this.data ? this.data.pass : '', Validators.required],
       cfpass:[this.data ? this.data.pass : '', Validators.required],
       status: [this.data ? this.data.status : true]
@@ -43,11 +47,11 @@ export class FormAccountComponent implements OnInit{
   }
 
   updateAccount() {
+    this.isSubmit  = true
     if (this.form.valid) {
       const check = this.checkPass(this.form.value.pass, this.form.value.cfpass)
       check ? this.toast.success('Tạo tài khoản thành công','Successfully !') : ''
-    } else {
-      this.checkRequied(this.form)
+      console.log(this.form.value)
     }
   }
 
@@ -62,14 +66,5 @@ export class FormAccountComponent implements OnInit{
       this.check = true
     }
     return this.check
-  }
-
-  checkRequied (data: any) {
-    data.value.email == '' ? this.toast.error('Bạn chưa nhập Email', 'Error !') : ''
-    data.value.fullname == '' ? this.toast.error('Bạn chưa nhập tên đầy đủ', 'Error !') : ''
-    data.value.phone == '' ? this.toast.error('Bạn chưa nhập số điện thoại', 'Error !') : ''
-    data.value.sex == '' ? this.toast.error('Bạn chưa chọn giới tính', 'Error !') : ''
-    data.value.pass == '' ? this.toast.error('Bạn chưa nhập mật khẩu', 'Error !') : ''
-    data.value.cfpass == '' ? this.toast.error('Bạn chưa nhập lại mật khẩu', 'Error !') : ''
   }
 }
