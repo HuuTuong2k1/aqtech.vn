@@ -20,12 +20,19 @@
         <mat-label>Mô tả</mat-label>
         <textarea formControlName="des" matInput placeholder="Nhập mô tả"></textarea>
       </mat-form-field>
+      <mat-error *ngIf="form.get('des')?.hasError('required') && form.get('des')?.touched">
+        Bạn chưa nhập mô tả
+      </mat-error>
     </div>
     <div class="mb-3">
       <mat-form-field class="example-full-width">
         <mat-label>Link ảnh</mat-label>
         <input matInput formControlName="link" placeholder="Nhập link ảnh">
+        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">link</mat-icon>
       </mat-form-field>
+      <mat-error *ngIf="form.get('link')?.hasError('required') && form.get('link')?.touched">
+        Bạn chưa nhập mô tả
+      </mat-error>
     </div>
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
