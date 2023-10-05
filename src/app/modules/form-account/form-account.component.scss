@@ -1,13 +1,24 @@
+$main-color: #009047;
+
 .form-add-account {
-  padding: 20px;
-  width: 500px;
+  width: 650px;
 
   header {
-    font-size: 20px;
+    color: $main-color;
+    font-size: 23px;
     font-weight: 600;
   }
 
   mat-form-field {
     width: 100%;
+  }
+
+  .line {
+    display: block;
+    border: 1px solid $main-color;
+  }
+
+  .icon-error {
+    color: red;
   }
 }

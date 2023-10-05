@@ -2,7 +2,7 @@
   <div class="row">
     <app-header-content></app-header-content>
   </div>
-  <div class="row customer-contain">
+  <div class="row table-contain">
     <div class="col">
       <div class="container-fluid p-0">
         <div class="row">
@@ -18,7 +18,7 @@
       <div class="container-fluid p-0 mt-2">
         <div class="row">
           <div class="col">
-            <div>
+            <div class="filter">
               <mat-form-field>
                 <mat-label>
                   <mat-icon>search</mat-icon>
@@ -61,7 +61,7 @@
                 <ng-container matColumnDef="active">
                   <th mat-header-cell *matHeaderCellDef> Thao tác </th>
                   <td mat-cell *matCellDef="let row" style="width: 20%;">
-                    <div class="active">
+                    <div class="active-btn">
                       <mat-icon (click)="openDialogEdit(row)">edit</mat-icon>
                       <mat-icon (click)="openDialogConfirmDelete(row)">delete</mat-icon>
                     </div>

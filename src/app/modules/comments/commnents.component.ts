@@ -4,61 +4,18 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+import { CommentService } from 'src/app/services/comment.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-commnents',
   templateUrl: './commnents.component.html',
   styleUrls: ['./commnents.component.scss']
 })
-export class CommentsComponent implements AfterViewInit{
-  data: Comment[] = [
-    {
-      email: 'nhtuong2001@gmail.com',
-      content: 'Bài viết khá hay, cần cung cấp thêm nhiều bài viết như vậy',
-      time: '2023-09-28 13:33:00',
-      type: true,
-      status: true
-    },
-    {
-      email: 'tn732506@gmail.com',
-      content: 'Bài viết khá hay, cần cung cấp thêm nhiều bài viết như vậy',
-      time: '2023-09-28 13:35:28',
-      type: true,
-      status: false
-    },
-    {
-      email: 'tn53875@gmail.com',
-      content: 'Sản phẩm tốt, cần cải thiện thêm về giao diện sản phẩm',
-      time: '2023-09-28 13:39:28',
-      type: false,
-      status: true
-    },
-    {
-      email: 'tn53875@gmail.com',
-      content: 'Sản phẩm tốt, cần cải thiện thêm về giao diện sản phẩm',
-      time: '2023-09-28 13:39:28',
-      type: false,
-      status: true
-    },
-    {
-      email: 'tn53875@gmail.com',
-      content: 'Sản phẩm tốt, cần cải thiện thêm về giao diện sản phẩm',
-      time: '2023-09-28 13:39:28',
-      type: false,
-      status: true
-    },
-    {
-      email: 'tn53875@gmail.com',
-      content: 'Sản phẩm tốt, cần cải thiện thêm về giao diện sản phẩm',
-      time: '2023-09-28 13:39:28',
-      type: false,
-      status: true
-    },
-  ]
-
+export class CommentsComponent implements OnInit, AfterViewInit{
   Columns: string[] = [
     'no',
-    'email',
+    'username',
     'content',
     'time',
     'type',
@@ -70,13 +27,18 @@ export class CommentsComponent implements AfterViewInit{
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private CommentService: CommentService
   ) {
-    this.dataTable = new MatTableDataSource(this.data)
+    // this.dataTable = new MatTableDataSource(this.data)
+  }
+
+  ngOnInit(): void {
+    this.getListComment()
   }
 
   ngAfterViewInit(): void {
-    this.dataTable.paginator = this.paginator
+    // this.dataTable.paginator = this.paginator
   }
 
   openDialogConfirmDelete(data: any) {
@@ -91,5 +53,22 @@ export class CommentsComponent implements AfterViewInit{
     if (this.dataTable.paginator) {
       this.dataTable.paginator.firstPage();
     }
+  }
+
+  getListComment() {
+    this.CommentService.getComment().subscribe({
+      next: data => {
+        this.dataTable = new MatTableDataSource(data)
+        this.dataTable.paginator = this.paginator
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+  }
+
+  formatDate(data: any): any {
+    const inputDate = new Date(data);
+    return format(inputDate, "dd/MM/yyyy HH:mm:ss")
   }
 }

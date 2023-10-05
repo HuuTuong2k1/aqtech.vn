@@ -1,8 +1,8 @@
 <div class="sidebar">
-  <div class="logo-aq">
+  <div class="logo-aq p-4">
     <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
   </div>
-  <div class="mt-3">
+  <div class="mt-3 p-2">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
         <div class="item-sidebar" routerLink="{{node.link}}" routerLinkActive="active">

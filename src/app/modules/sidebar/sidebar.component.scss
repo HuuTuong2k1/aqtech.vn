@@ -1,4 +1,3 @@
-// @import '../../../styles.scss';
 $main-color: #009047;
 
 .logo-aq {
@@ -9,25 +8,37 @@ $main-color: #009047;
 
 .item-sidebar {
   display: flex;
+  flex-grow: 1;
   align-items: center;
   justify-items: center;
   gap: 15px;
+  padding: 10px;
+
+  mat-icon {
+    color: $main-color;
+  }
+
+  .item-name {
+    font-size: 16px;
+    color: #144339;
+    font-weight: 400;
+    font-family: muli,sans-serif;
+  }
 
   &:hover {
     cursor: pointer;
     color: $main-color;
   }
 
-  .item-name {
-    font-size: medium;
-    font-weight: 400;
-  }
-}
-
-.item-sidebar {
   &.active {
-    color: $main-color;
+    background-color: #009047;
     font-weight: 600;
     cursor: pointer;
+    padding-left: 15px;
+    border-radius: 5px;
+
+    .item-name, mat-icon {
+      color: #ffff;
+    }
   }
 }

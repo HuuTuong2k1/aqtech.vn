@@ -40,6 +40,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBannerCustomerComponent } from './modules/form-banner-customer/form-banner-customer.component';
 import { FormAccountComponent } from './modules/form-account/form-account.component';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
+    MatSelectModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

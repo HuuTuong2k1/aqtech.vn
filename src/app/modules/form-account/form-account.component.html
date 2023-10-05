@@ -1,97 +1,106 @@
 <form class="form-add-account" [formGroup]="form" (ngSubmit)="updateAccount()">
-  <div class="mb-4">
+  <div class="p-4">
     <header>
       {{data ? "Chỉnh sửa tài khoản" : "Thêm tài khoản"}}
     </header>
   </div>
 
-  <div class="mb-3">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="nhtuong2001@gmail.com" formControlName="email" required>
-      <mat-icon matSuffix>email</mat-icon>
-    </mat-form-field>
-    <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched" >
-      Bạn chưa nhập email.
-    </mat-error>
-    <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">
-      Email không hợp lệ.
-    </mat-error>
-  </div>
+  <span class="line"></span>
 
-  <div class="d-flex">
-    <div class="mb-3 flex-grow-1">
+  <div class="p-4">
+    <div class="d-flex gap-3">
+      <div class="mb-3 w-50">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="nhtuong2001@gmail.com" formControlName="email" required>
+          <mat-icon matSuffix [class.icon-error]="(form.get('email')?.hasError('required') || form.get('email')?.hasError('email')) && form.get('email')?.touched">email</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched" >
+          Bạn chưa nhập email.
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">
+          Email không hợp lệ.
+        </mat-error>
+      </div>
+
+      <div class="mb-3 w-50">
+        <mat-form-field>
+          <mat-label>Tên đầy đủ</mat-label>
+          <input matInput formControlName="fullname">
+          <mat-icon matSuffix [class.icon-error]="form.get('fullname')?.hasError('required') && form.get('fullname')?.touched">person</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="form.get('fullname')?.hasError('required') && form.get('fullname')?.touched">
+          Bạn chưa nhập tên.
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="d-flex gap-3">
+      <div class="mb-3">
+        <mat-form-field>
+          <mat-label>Giới tính</mat-label>
+          <mat-select formControlName="sex">
+            <mat-option value="Nam">Nam</mat-option>
+            <mat-option value="Nữ">Nữ</mat-option>
+            <mat-option value="">Không hiển thị</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3 flex-grow-1">
+        <mat-form-field>
+          <mat-label>Số điện thoại</mat-label>
+          <input matInput formControlName="phone">
+          <mat-icon matSuffix [class.icon-error]="form.get('phone')?.hasError('required') && form.get('phone')?.touched">phone</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="form.get('phone')?.hasError('required') && form.get('phone')?.touched">
+          Bạn chưa nhập số điện thoại.
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="mb-3">
       <mat-form-field>
-        <mat-label>Tên đầy đủ</mat-label>
-        <input matInput formControlName="fullname">
-        <mat-icon matSuffix>person</mat-icon>
+        <mat-label>Mật khẩu</mat-label>
+        <input matInput formControlName="pass" [type]="hidePass ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+          <mat-icon matSuffix [class.icon-error]="form.get('phone')?.hasError('required') && form.get('pass')?.touched">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
       </mat-form-field>
-      <mat-error *ngIf="form.get('fullname')?.hasError('required') && form.get('fullname')?.touched">
-        Bạn chưa nhập tên.
+      <mat-error *ngIf="form.get('pass')?.hasError('required') && form.get('pass')?.touched">
+        Bạn chưa nhập mật khẩu.
       </mat-error>
     </div>
+
     <div class="mb-3">
-      <label class="form-label me-4 ms-2">Giới tính</label>
-      <mat-radio-group aria-label="Select an option" class="d-block" formControlName="sex">
-        <mat-radio-button value="Nam">Nam</mat-radio-button>
-        <mat-radio-button value="Nữ">Nữ</mat-radio-button>
-        <mat-radio-button value="" [style.display]="'none'">Ẩn</mat-radio-button>
-      </mat-radio-group>
+      <mat-form-field>
+        <mat-label>Nhập lại mật khẩu</mat-label>
+        <input matInput formControlName="cfpass" [type]="hideCFPass ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hideCFPass = !hideCFPass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCFPass">
+          <mat-icon matSuffix [class.icon-error]="form.get('phone')?.hasError('required') && form.get('cfpass')?.touched">{{hideCFPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('pass')?.hasError('required') && form.get('cfpass')?.touched">
+        Bạn chưa nhập lại mật khẩu.
+      </mat-error>
     </div>
-  </div>
 
-  <div class="mb-3">
-    <mat-form-field>
-      <mat-label>Số điện thoại</mat-label>
-      <input matInput formControlName="phone">
-      <mat-icon matSuffix>phone</mat-icon>
-    </mat-form-field>
-    <mat-error *ngIf="form.get('phone')?.hasError('required') && form.get('phone')?.touched">
-      Bạn chưa nhập số điện thoại.
-    </mat-error>
-  </div>
-
-  <div class="mb-3">
-    <mat-form-field>
-      <mat-label>Mật khẩu</mat-label>
-      <input matInput formControlName="pass" [type]="hidePass ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
-        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-error *ngIf="form.get('pass')?.hasError('required') && form.get('pass')?.touched">
-      Bạn chưa nhập mật khẩu.
-    </mat-error>
-  </div>
-
-  <div class="mb-3">
-    <mat-form-field>
-      <mat-label>Nhập lại mật khẩu</mat-label>
-      <input matInput formControlName="cfpass" [type]="hideCFPass ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hideCFPass = !hideCFPass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCFPass">
-        <mat-icon>{{hideCFPass ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-error *ngIf="form.get('pass')?.hasError('required') && form.get('cfpass')?.touched">
-      Bạn chưa nhập lại mật khẩu.
-    </mat-error>
-  </div>
-
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
-    <div class="col-sm-9 align-self-center">
-      <mat-slide-toggle formControlName="status"></mat-slide-toggle>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
+      <div class="col-sm-9 align-self-center">
+        <mat-slide-toggle formControlName="status"></mat-slide-toggle>
+      </div>
     </div>
-  </div>
 
-  <div class="row mb-3">
-    <span class="required">(*) là bắt buộc phải nhập</span>
-  </div>
+    <div class="row mb-3">
+      <span class="required">(*) là bắt buộc phải nhập</span>
+    </div>
 
-  <div class="d-flex gap-2 justify-content-end">
-    <button type="submit" class="btn btn-success">
-      {{data ? "Cập nhật" : "Thêm mới"}}
-    </button>
-    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+    <div class="d-flex gap-2 justify-content-end">
+      <button type="submit" class="btn btn-success">
+        {{data ? "Cập nhật" : "Thêm mới"}}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+    </div>
   </div>
 </form>
