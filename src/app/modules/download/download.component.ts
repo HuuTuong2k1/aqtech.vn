@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,9 +11,9 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
   templateUrl: './download.component.html',
   styleUrls: ['./download.component.scss']
 })
-export class DownloadComponent implements OnInit {
+export class DownloadComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator
-  dataTable!: MatTableDataSource<Download>
+  dataTable!: MatTableDataSource<any>
   data: Download[] = [
     {
       name: "MC-Test Lite v2022.01A",
@@ -99,6 +99,9 @@ export class DownloadComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataTable = new MatTableDataSource(this.data)
+  }
+
+  ngAfterViewInit(): void {
     this.dataTable.paginator = this.paginator
   }
 

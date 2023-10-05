@@ -12,7 +12,7 @@
       <mat-form-field>
         <mat-label>Tên</mat-label>
         <input matInput formControlName="name" required>
-        <mat-icon matSuffix [class.icon-error]="form.get('name')?.hasError('required') && form.get('name')?.touched">email</mat-icon>
+        <mat-icon matSuffix [class.icon-error]="form.get('name')?.hasError('required') && form.get('name')?.touched">menu</mat-icon>
       </mat-form-field>
       <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched" >
         Bạn chưa nhập tên.
@@ -22,7 +22,7 @@
       <mat-form-field>
         <mat-label>Danh mục cha</mat-label>
         <mat-select formControlName="parent">
-          <mat-option value="">-- Danh mục cha --</mat-option>
+          <mat-option value="">Không có</mat-option>
           <mat-option value="Home">Home</mat-option>
           <mat-option value="Product">Product</mat-option>
           <mat-option value="About Us">About Us</mat-option>
@@ -34,7 +34,7 @@
       <mat-form-field>
         <mat-label>Link</mat-label>
         <input matInput formControlName="link" required>
-        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">email</mat-icon>
+        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">link</mat-icon>
       </mat-form-field>
       <mat-error *ngIf="form.get('link')?.hasError('required') && form.get('link')?.touched">
         Bạn chưa nhập link.

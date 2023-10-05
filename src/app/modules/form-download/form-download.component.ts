@@ -24,7 +24,7 @@ export class FormDownloadComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.formfb.group({
-      image: [this.data ? this.data.iamge : '', Validators.required],
+      image: ['', Validators.required],
       name: [this.data ? this.data.name : '', Validators.required],
       link: [this.data ? this.data.link : '', Validators.required],
       type: [this.data ? this.data.type : '', Validators.required],

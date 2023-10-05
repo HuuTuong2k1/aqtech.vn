@@ -1,44 +1,69 @@
 <form class="form-add-download" [formGroup]="form" (ngSubmit)="data ? updateDownload() : addDownload()">
-  <div class="mb-3">
+  <div class="mb-3 p-4">
     <header>
       {{data ? "Chỉnh sửa" : "Thêm mới"}}
     </header>
   </div>
 
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Tên File</label>
-    <input type="text" class="form-control" placeholder="Nhập tên file" formControlName="name">
-  </div>
+  <span class="line"></span>
 
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Link</label>
-    <input type="text" class="form-control" placeholder="nhập đường link dẫn tới file" formControlName="link">
-  </div>
-
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Hình ảnh</label>
-    <input formControlName="image" class="form-control" type="file">
-  </div>
-  
-  <div class="mb-3 d-flex" *ngIf="data && data.image != ''">
-    <img width="20%" src="{{data.image}}" alt="">
-  </div>
-
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Loại</label>
-    <input type="text" class="form-control" formControlName="type">
-  </div>
-
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
-    <div class="col-sm-9 align-self-center">
-      <mat-slide-toggle [checked] = "checked" formControlName="status"></mat-slide-toggle>
+  <div class="p-4">
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Tên File</mat-label>
+        <input matInput formControlName="name" placeholder="Nhập tên file" required>
+        <mat-icon matSuffix [class.icon-error]="form.get('name')?.hasError('required') && form.get('name')?.touched">cloud_download</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+        Tên file là bắt buộc
+      </mat-error>
     </div>
-  </div>
-  <div class="d-flex gap-2 justify-content-end">
-    <button type="submit" class="btn btn-success">
-      {{data ? "Cập nhật" : "Thêm mới"}}
-    </button>
-    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Link</mat-label>
+        <input matInput formControlName="link" placeholder="nhập đường link dẫn tới file" required>
+        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">link</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('link')?.hasError('required') && form.get('link')?.touched">
+        Bạn chưa cung cấp link download
+      </mat-error>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Loại</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option value="">Chọn phiên bản</mat-option>
+          <mat-option value="Trial">Trial</mat-option>
+          <mat-option value="Full">Full</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('type')?.hasError('required') && form.get('type')?.touched">
+        Bạn chưa chọn phiên bản download
+      </mat-error>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Hình ảnh</label>
+      <input formControlName="image" class="form-control" type="file" required>
+    </div>
+
+    <div class="mb-3 d-flex" *ngIf="data && data.image != ''">
+      <img width="20%" src="{{data.image}}" alt="">
+    </div>
+
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
+      <div class="col-sm-9 align-self-center">
+        <mat-slide-toggle [checked] = "checked" formControlName="status"></mat-slide-toggle>
+      </div>
+    </div>
+    <div class="d-flex gap-2 justify-content-end">
+      <button type="submit" class="btn btn-success">
+        {{data ? "Cập nhật" : "Thêm mới"}}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+    </div>
   </div>
 </form>
