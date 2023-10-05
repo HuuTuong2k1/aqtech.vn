@@ -22,3 +22,7 @@ $main-color: #009047;
     color: red;
   }
 }
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}

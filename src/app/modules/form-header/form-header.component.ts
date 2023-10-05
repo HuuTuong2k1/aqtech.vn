@@ -22,7 +22,7 @@ export class FormHeaderComponent implements OnInit{
   ngOnInit(): void {
     this.form = this.formfb.group({
       name: [this.data ? this.data.name : '', Validators.required],
-      parent: [this.data ? this.data.parent : '', Validators.required],
+      parent: [this.data ? this.data.parent : ''],
       link: [this.data ? this.data.link : '', Validators.required],
       status: [this.data ? this.data.status : this.checked, Validators.required]
     })
@@ -34,10 +34,12 @@ export class FormHeaderComponent implements OnInit{
 
   updateHeader() {
     console.log(this.form.value)
-    try {
-      this.toast.success('Cập nhật thành công', 'Successfully')
-    } catch (Error) {
-      this.toast.error('Cập nhật không thành công', 'Unsuccessfully')
+    if(this.form.valid) {
+      try {
+        this.toast.success('Cập nhật thành công', 'Successfully')
+      } catch (Error) {
+        this.toast.error('Cập nhật không thành công', 'Unsuccessfully')
+      }
     }
   }
 }

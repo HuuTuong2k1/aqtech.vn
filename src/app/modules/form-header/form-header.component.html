@@ -1,37 +1,56 @@
 <form class="form-add-header" [formGroup]="form" (ngSubmit)="updateHeader()">
-  <div class="mb-3">
+  <div class="p-4">
     <header>
       {{data ? "Chỉnh sửa Header" : "Thêm mới header"}}
     </header>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Tên</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="name">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Danh mục cha</label>
-    <select class="form-select" aria-label="Default select example" formControlName="parent">
-      <option value="">--Chọn danh mục cha--</option>
-      <option value="Home">Home</option>
-      <option value="Product">Product</option>
-      <option value="About-Us">About Us</option>
-      <option value="Contact-Us">Contact Us</option>
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Link</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="link">
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
-    <div class="col-sm-9 align-self-center">
-      <mat-slide-toggle [checked] = "checked" formControlName="status"></mat-slide-toggle>
+
+  <span class="line"></span>
+
+  <div class="p-4">
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Tên</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-icon matSuffix [class.icon-error]="form.get('name')?.hasError('required') && form.get('name')?.touched">email</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched" >
+        Bạn chưa nhập tên.
+      </mat-error>
     </div>
-  </div>
-  <div class="d-flex gap-2 justify-content-end">
-    <button type="submit" class="btn btn-success">
-      {{data ? "Cập nhật" : "Thêm mới"}}
-    </button>
-    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Danh mục cha</mat-label>
+        <mat-select formControlName="parent">
+          <mat-option value="">-- Danh mục cha --</mat-option>
+          <mat-option value="Home">Home</mat-option>
+          <mat-option value="Product">Product</mat-option>
+          <mat-option value="About Us">About Us</mat-option>
+          <mat-option value="Contact Us">Contact Us</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Link</mat-label>
+        <input matInput formControlName="link" required>
+        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">email</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="form.get('link')?.hasError('required') && form.get('link')?.touched">
+        Bạn chưa nhập link.
+      </mat-error>
+    </div>
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
+      <div class="col-sm-9 align-self-center">
+        <mat-slide-toggle [checked] = "checked" formControlName="status"></mat-slide-toggle>
+      </div>
+    </div>
+    <div class="d-flex gap-2 justify-content-end">
+      <button type="submit" class="btn btn-success">
+        {{data ? "Cập nhật" : "Thêm mới"}}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancle</button>
+    </div>
   </div>
 </form>

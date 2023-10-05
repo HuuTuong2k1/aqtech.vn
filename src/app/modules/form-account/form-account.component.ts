@@ -13,12 +13,6 @@ export class FormAccountComponent implements OnInit{
   check: boolean = true
   form!: FormGroup
   required: boolean = true
-  isEmptyEmail: boolean = true
-  isEmptyFullName: boolean = true
-  isEmptyPhone: boolean = true
-  isEmptySex: boolean = true
-  isEmptyPass: boolean = true
-  isEmptyCFPass: boolean = true
   hidePass: boolean = true
   hideCFPass: boolean = true
   isSubmit: boolean = false
