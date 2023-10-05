@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormHeaderComponent } from '../form-header/form-header.component';
 import { FormBannerCustomerComponent } from '../form-banner-customer/form-banner-customer.component';
 import { FormAccountComponent } from '../form-account/form-account.component';
+import { FormDownloadComponent } from '../form-download/form-download.component';
 
 @Component({
   selector: 'app-header-content',
@@ -40,5 +41,9 @@ export class HeaderContentComponent implements OnInit{
 
   openFormAddAccount() {
     this.dialog.open(FormAccountComponent)
+  }
+
+  openFormAddDownload() {
+    this.dialog.open(FormDownloadComponent)
   }
 }

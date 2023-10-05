@@ -18,6 +18,10 @@
         Thêm mới
         <mat-icon>add</mat-icon>
       </button>
+      <button *ngIf="title === 'Download'" class="btn btn-add-header d-flex" (click)="openFormAddDownload()">
+        Thêm mới
+        <mat-icon>add</mat-icon>
+      </button>
       <!--/hiện thị nút thêm ứng với từng form thích hợp với sidebar -->
     </div>
   </div>

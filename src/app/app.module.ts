@@ -42,6 +42,7 @@ import { FormAccountComponent } from './modules/form-account/form-account.compon
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import { FormDownloadComponent } from './modules/form-download/form-download.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { HttpClientModule } from '@angular/common/http';
     ConfirmDeleteComponent,
     FormBannerCustomerComponent,
     FormAccountComponent,
+    FormDownloadComponent,
   ],
   imports: [
     BrowserModule,
