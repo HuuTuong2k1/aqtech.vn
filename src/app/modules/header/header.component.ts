@@ -7,6 +7,8 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { HeaderService } from 'src/app/services/header.service';
+import { ActivatedRoute } from '@angular/router';
+import { catchError, map } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -23,18 +25,26 @@ export class HeaderComponent implements OnInit{
     'Thao tác'
   ];
 
+  title: string = ''
+  breadcrumb: string = ''
   dataTable!: MatTableDataSource<Header>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private dialog: MatDialog,
     private toast: ToastrService,
-    private HeaderService: HeaderService
+    private HeaderService: HeaderService,
+    private activeRoute: ActivatedRoute,
   ){
 
   }
 
   ngOnInit(): void {
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+    }
     this.fetchDataHeader()
   }
 
@@ -47,10 +57,14 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  openDialog(data: any) {
-    this.dialog.open(FormHeaderComponent, {
+  openDialogEdit(data: any) {
+    const dialogRef = this.dialog.open(FormHeaderComponent, {
       data: data
     })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchDataHeader();
+    });
   }
 
   openDialogConfirmDelete(data: any) {
@@ -72,5 +86,32 @@ export class HeaderComponent implements OnInit{
         console.log(err)
       }
     })
+  }
+
+  openFormAddHeader() {
+    const dialogRef = this.dialog.open(FormHeaderComponent)
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchDataHeader();
+    });
+  }
+
+  changeStatus(newStatus: boolean, id: number, data: any) {
+    data.isHienThi = newStatus
+
+    this.HeaderService.updateHeader(id,data).pipe(
+      map(() => 'Cập nhật trạng thái header thành công'), // Trả về chuỗi thành công
+      catchError((error) => {
+        throw error;
+      })
+    ).subscribe({
+      next: res => {
+        this.toast.success(res, 'Successfully')
+        this.fetchDataHeader()
+      },
+      error: err => {
+        console.log(err)
+        this.toast.error('Cập nhật trạng thái header thật bại', 'Unsuccessfully')
+      }
+    });
   }
 }

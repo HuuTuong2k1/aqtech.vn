@@ -1,4 +1,4 @@
-<form class="form-add-header" [formGroup]="form" (ngSubmit)="AddHeader()">
+<form class="form-add-header" [formGroup]="form" (ngSubmit)="data ? updateHeader(data.id) : AddHeader()">
   <div class="p-4">
     <header>
       {{data ? "Chỉnh sửa Header" : "Thêm mới header"}}

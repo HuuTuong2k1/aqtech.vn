@@ -19,8 +19,8 @@ export class HeaderService {
     return this.http.post('/api/Header', data, { responseType: 'text' })
   }
 
-  public updateHeader(data: any): Observable<any> {
-    return this.http.patch('', data);
+  public updateHeader(id: number, data: any): Observable<string> {
+    return this.http.put(`/api/Header/${id}`, data, { responseType: 'text' });
   }
 
   public deleteHeader(id: number): Observable<string> {

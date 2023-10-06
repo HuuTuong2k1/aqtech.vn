@@ -57,4 +57,26 @@ export class FormHeaderComponent implements OnInit{
       });
     }
   }
+
+  updateHeader(id: number) {
+    if(this.form.valid) {
+      console.log(this.form.value)
+      this.HeaderService.updateHeader(id,this.form.value).pipe(
+        map(() => 'Chỉnh sửa header thành công'), // Trả về chuỗi thành công
+        catchError((error) => {
+          throw error;
+        })
+      ).subscribe({
+        next: res => {
+          this.toast.success(res, 'Successfully')
+          this.dialogRef.close()
+        },
+        error: err => {
+          console.log(err)
+          this.toast.error('Chỉnh sửa header thật bại', 'Unsuccessfully')
+          this.dialogRef.close()
+        }
+      });
+    }
+  }
 }
