@@ -17,7 +17,7 @@ export class HeaderContentComponent implements OnInit{
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
 
   }

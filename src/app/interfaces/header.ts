@@ -1,6 +1,6 @@
 export interface Header {
-  name: string,
-  parent: string,
-  link: string,
-  status: boolean
+  ten: string,
+  danhMucCha: string,
+  urlheader: string,
+  isHienThi: boolean
 }

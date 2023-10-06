@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Header } from 'src/app/interfaces/header';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -11,17 +13,21 @@ export class ConfirmDeleteComponent {
   constructor(
     private dialogRef: MatDialogRef<ConfirmDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private HeaderService: HeaderService
   ) {}
 
-  deleteHeader(data: any) {
-    console.log(data)
-    try {
-      this.closeDialog()
-      this.toast.success("Xóa thành công", "Successfully")
-    } catch (error) {
-      this.toast.error("Xóa không thành công", "error")
-    }
+  deleteHeader(id: number) {
+    this.HeaderService.deleteHeader(id).subscribe({
+      next: res => {
+        this.toast.success(res, 'Successfully')
+        this.dialogRef.close();
+      },
+      error: err => {
+        this.toast.success(err, 'Unsuccessfully')
+        this.dialogRef.close();
+      }
+    });
   }
 
   closeDialog() {

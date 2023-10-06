@@ -1,4 +1,4 @@
-<form class="form-add-header" [formGroup]="form" (ngSubmit)="updateHeader()">
+<form class="form-add-header" [formGroup]="form" (ngSubmit)="AddHeader()">
   <div class="p-4">
     <header>
       {{data ? "Chỉnh sửa Header" : "Thêm mới header"}}
@@ -11,17 +11,17 @@
     <div class="mb-3">
       <mat-form-field>
         <mat-label>Tên</mat-label>
-        <input matInput formControlName="name" required>
-        <mat-icon matSuffix [class.icon-error]="form.get('name')?.hasError('required') && form.get('name')?.touched">menu</mat-icon>
+        <input matInput formControlName="ten" required>
+        <mat-icon matSuffix [class.icon-error]="form.get('ten')?.hasError('required') && form.get('ten')?.touched">menu</mat-icon>
       </mat-form-field>
-      <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched" >
+      <mat-error *ngIf="form.get('ten')?.hasError('required') && form.get('ten')?.touched" >
         Bạn chưa nhập tên.
       </mat-error>
     </div>
     <div class="mb-3">
       <mat-form-field>
         <mat-label>Danh mục cha</mat-label>
-        <mat-select formControlName="parent">
+        <mat-select formControlName="danhMucCha">
           <mat-option value="">Không có</mat-option>
           <mat-option value="Home">Home</mat-option>
           <mat-option value="Product">Product</mat-option>
@@ -33,17 +33,17 @@
     <div class="mb-3">
       <mat-form-field>
         <mat-label>Link</mat-label>
-        <input matInput formControlName="link" required>
-        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">link</mat-icon>
+        <input matInput formControlName="urlheader" required>
+        <mat-icon matSuffix [class.icon-error]="form.get('urlheader')?.hasError('required') && form.get('urlheader')?.touched">link</mat-icon>
       </mat-form-field>
-      <mat-error *ngIf="form.get('link')?.hasError('required') && form.get('link')?.touched">
+      <mat-error *ngIf="form.get('urlheader')?.hasError('required') && form.get('urlheader')?.touched">
         Bạn chưa nhập link.
       </mat-error>
     </div>
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
       <div class="col-sm-9 align-self-center">
-        <mat-slide-toggle [checked] = "checked" formControlName="status"></mat-slide-toggle>
+        <mat-slide-toggle [checked] = "checked" formControlName="isHienThi"></mat-slide-toggle>
       </div>
     </div>
     <div class="d-flex gap-2 justify-content-end">
