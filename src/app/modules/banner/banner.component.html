@@ -1,6 +1,19 @@
 <div class="container-fluid p-0">
   <div class="row">
-    <app-header-content></app-header-content>
+    <div class="container-fluid">
+      <div class="row breadcrumb px-2">
+        <div class="col current-url px-4">
+          <div class="d-flex flex-column gap-2">
+            <span class="title">{{title}}</span>
+            <span class="site-map-current">{{breadcrumb}}</span>
+          </div>
+          <button *ngIf="title === 'Banner'" class="btn btn-add d-flex" (click)="openFormAddBanner()">
+            Thêm mới
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row banner-contain">
     <div class="col">

@@ -12,6 +12,7 @@ import { ProductComponent } from './modules/product/product.component';
 import { AccountComponent } from './modules/account/account.component';
 import { DownloadComponent } from './modules/download/download.component';
 import { LoginComponent } from './modules/login/login.component';
+import { FormProductComponent } from './modules/form-product/form-product.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,12 @@ const routes: Routes = [
         path: 'binh-luan', component: CommentsComponent, data: {name: 'Bình luận', breadcrumb: 'Admin > Bình luận'}
       },
       {
-        path: 'san-pham', component: ProductComponent, data: {name: 'Sản phẩm', breadcrumb : 'Admin > Sản phẩm'}
+        path: 'san-pham', component: ProductComponent, data: {name: 'Sản phẩm', breadcrumb : 'Admin > Sản phẩm'},
+        children: [
+          {
+            path: 'them-san-pham', component: FormProductComponent, data : {name: 'Thêm sản phẩm', breadcrumb : 'Admin > Sản phẩm > Thêm sản phẩm'}
+          }
+        ]
       },
       {
         path: 'tai-khoan-khach-hang', component: AccountComponent, data: {name: 'Tài khoản khách hàng', breadcrumb: 'Admin > Tài khoản khách hàng'}

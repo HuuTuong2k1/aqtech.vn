@@ -36,3 +36,37 @@ input {
     font-size: 13px;
   }
 }
+
+.breadcrumb {
+  background-color: #ffff;
+
+  .current-url {
+    padding: 0 30px;
+    height: 100px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: $main-color;
+    }
+
+    .site-map-current {
+      font-weight: 600;
+      font-size: small;
+    }
+
+    .btn-add {
+      background-color: $main-color;
+      color: #ffff;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}

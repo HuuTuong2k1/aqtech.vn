@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBannerCustomerComponent } from '../form-banner-customer/form-banner-customer.component';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
@@ -6,13 +6,16 @@ import { Banner } from 'src/app/interfaces/banner';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements AfterViewInit{
+export class BannerComponent implements AfterViewInit, OnInit{
+  title: string = ''
+  breadcrumb: string = ''
   data: Banner[] = [
     {
       image: 'assets/images/images.jpg',
@@ -84,9 +87,18 @@ export class BannerComponent implements AfterViewInit{
 
   constructor(
     private dialog: MatDialog,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private activeRoute: ActivatedRoute,
   ){
     this.dataTable = new MatTableDataSource(this.data)
+  }
+
+  ngOnInit(): void {
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+    }
   }
 
   ngAfterViewInit(): void {
@@ -112,5 +124,9 @@ export class BannerComponent implements AfterViewInit{
     this.dialog.open(ConfirmDeleteComponent, {
       data: data
     })
+  }
+
+  openFormAddBanner() {
+    this.dialog.open(FormBannerCustomerComponent)
   }
 }

@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { CommentService } from 'src/app/services/comment.service';
 import { format } from 'date-fns';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-commnents',
@@ -24,16 +25,24 @@ export class CommentsComponent implements OnInit, AfterViewInit{
   ]
 
   dataTable!: MatTableDataSource<Comment>
+  title: string = ''
+  breadcrumb: string = ''
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
   constructor(
     private dialog: MatDialog,
-    private CommentService: CommentService
+    private CommentService: CommentService,
+    private activeRoute: ActivatedRoute,
   ) {
     // this.dataTable = new MatTableDataSource(this.data)
   }
 
   ngOnInit(): void {
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+    }
     this.getListComment()
   }
 

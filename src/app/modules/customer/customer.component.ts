@@ -104,6 +104,8 @@ export class CustomerComponent implements AfterViewInit, OnInit{
   ]
 
   dataTable!: MatTableDataSource<any>
+  title: string = ''
+  breadcrumb: string = ''
 
   constructor(
     private dialog: MatDialog,
@@ -115,8 +117,12 @@ export class CustomerComponent implements AfterViewInit, OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
   ngOnInit(): void {
-    this.activeRoute.snapshot.data['name'] ? this.namePage = this.activeRoute.snapshot.data['name'] : this.namePage = 'Khách hàng'
-    this.checkCurrentUrl(this.namePage)
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+      this.checkCurrentUrl(this.title)
+    }
   }
 
   ngAfterViewInit(): void {
@@ -150,5 +156,9 @@ export class CustomerComponent implements AfterViewInit, OnInit{
     } else {
       this.dataTable.data = this.dataTable.data.filter(e => e.type === false);
     }
+  }
+
+  openFormAddCustomer() {
+    this.dialog.open(FormBannerCustomerComponent)
   }
 }

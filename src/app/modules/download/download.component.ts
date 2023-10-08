@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Download } from 'src/app/interfaces/download';
 import { FormDownloadComponent } from '../form-download/form-download.component';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-download',
@@ -14,6 +15,8 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 export class DownloadComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator
   dataTable!: MatTableDataSource<any>
+  title: string = ''
+  breadcrumb: string = ''
   data: Download[] = [
     {
       name: "MC-Test Lite v2022.01A",
@@ -97,18 +100,25 @@ export class DownloadComponent implements OnInit, AfterViewInit {
     'active'
   ]
 
+  constructor(
+    private dialog: MatDialog,
+    private activeRoute: ActivatedRoute,
+  ) {
+
+  }
+
   ngOnInit(): void {
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+    }
+
     this.dataTable = new MatTableDataSource(this.data)
   }
 
   ngAfterViewInit(): void {
     this.dataTable.paginator = this.paginator
-  }
-
-  constructor(
-    private dialog: MatDialog,
-  ) {
-
   }
 
   openDialogEdit(data: any) {
@@ -129,5 +139,9 @@ export class DownloadComponent implements OnInit, AfterViewInit {
     if (this.dataTable.paginator) {
       this.dataTable.paginator.firstPage()
     }
+  }
+
+  openFormAddDownload() {
+    this.dialog.open(FormDownloadComponent)
   }
 }

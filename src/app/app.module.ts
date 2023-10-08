@@ -26,7 +26,6 @@ import { DownloadComponent } from './modules/download/download.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { HeaderContentComponent } from './modules/header-content/header-content.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -43,6 +42,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { FormDownloadComponent } from './modules/form-download/form-download.component';
+import { FormProductComponent } from './modules/form-product/form-product.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +60,12 @@ import { FormDownloadComponent } from './modules/form-download/form-download.com
     AccountComponent,
     DownloadComponent,
     LoginComponent,
-    HeaderContentComponent,
     FormHeaderComponent,
     ConfirmDeleteComponent,
     FormBannerCustomerComponent,
     FormAccountComponent,
     FormDownloadComponent,
+    FormProductComponent,
   ],
   imports: [
     BrowserModule,

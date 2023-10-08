@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-general-setting',
@@ -7,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./general-setting.component.scss']
 })
 export class GeneralSettingComponent implements OnInit{
+  title: string = ''
+  breadcrumb: string = ''
   color: string = '#009047'
   checked: boolean = true
   form!: FormGroup
@@ -27,6 +30,12 @@ export class GeneralSettingComponent implements OnInit{
   second_enable_items = this.enable_items.slice(Math.ceil(this.enable_items.length / 2));
 
   ngOnInit(): void {
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+    }
+    
     this.form = this.formfb.group({
       namewebsite : ['', Validators.required],
       logo : ['', Validators.required],
@@ -38,7 +47,8 @@ export class GeneralSettingComponent implements OnInit{
   }
 
   constructor(
-    private formfb: FormBuilder
+    private formfb: FormBuilder,
+    private activeRoute: ActivatedRoute,
   ) {
 
   }

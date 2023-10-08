@@ -5,14 +5,17 @@ import { FormAccountComponent } from '../form-account/form-account.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { Account } from 'src/app/interfaces/account';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements AfterViewInit{
+export class AccountComponent implements AfterViewInit, OnInit{
 
+  title: string = ''
+  breadcrumb: string = ''
   data: Account[] = [
     {
       fullname: "Nguyễn Hữu Tường",
@@ -102,9 +105,18 @@ export class AccountComponent implements AfterViewInit{
   dataTable!: MatTableDataSource<Account>
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activeRoute: ActivatedRoute,
   ) {
     this.dataTable = new MatTableDataSource(this.data)
+  }
+
+  ngOnInit(): void {
+    const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
+    if (routeData) {
+      routeData['name'] ? this.title = routeData['name'] : this.title = ''
+      routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
+    }
   }
 
   ngAfterViewInit(): void {
@@ -130,5 +142,9 @@ export class AccountComponent implements AfterViewInit{
     if(this.dataTable.paginator) {
       this.dataTable.paginator.firstPage()
     }
+  }
+
+  openFormAddAccount() {
+    this.dialog.open(FormAccountComponent)
   }
 }
