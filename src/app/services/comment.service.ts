@@ -12,6 +12,10 @@ export class CommentService {
   ) { }
 
   public getComment(): Observable<any> {
-    return this.http.get("api/BinhLuan")
+    return this.http.get('api/BinhLuan')
+  }
+
+  public deleteComment(id: number): Observable<string> {
+    return this.http.delete(`api/BinhLuan/${id}`, { responseType: 'text' })
   }
 }
