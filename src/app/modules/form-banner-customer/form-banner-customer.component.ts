@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
+import { BannerService } from 'src/app/services/banner.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form-banner-customer',
@@ -13,45 +15,66 @@ export class FormBannerCustomerComponent {
   form!: FormGroup
   checked: boolean = true
   oldImage: string = ''
+  pathName: string = ''
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<FormBannerCustomerComponent>,
     private formfb: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private BannerService: BannerService,
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
     this.form = this.formfb.group({
-      image: [this.data ? this.data.name : '', Validators.required],
-      des: [this.data ? this.data.description : '', Validators.required],
-      link: [this.data ? this.data.link : '', Validators.required],
-      status: [this.data ? this.data.status : this.checked, Validators.required]
+      hinhDaiDien: [''],
+      noiDung: [this.data ? this.data.noiDung : '', Validators.required],
+      urlbanner: [this.data ? this.data.urlbanner : '', Validators.required],
+      isHienThi: [this.data ? this.data.isHienThi : this.checked, Validators.required],
+      createdTime: [new Date().toISOString(), Validators.required],
+      createdBy: ['Admin', Validators.required]
     });
 
-    (this.data && this.data.image) ? this.oldImage = this.data.image : '';
+    console.log(this.data);
+    (this.data && this.data.hinhDaiDien) ? this.oldImage = this.data.hinhDaiDien : '';
+    this.pathName = window.location.pathname
   }
 
   closeDialog() {
     this.dialogRef.close()
   }
 
-  updateBanner() {
-    this.form.value['image'] = this.oldImage
-    console.log(this.form.value)
-    try {
-      this.toast.success('Cập nhật thành công', 'Successfully')
-    } catch (Error) {
-      this.toast.error('Cập nhật không thành công', 'Unsuccessfully')
+  update(id: number) {
+    this.form.value['hinhDaiDien'] = this.oldImage
+    if (this.form.valid) {
+      (this.pathName === '/banner') ?
+      this.BannerService.putBanner(this.form.value, id).subscribe({
+        next: data => {
+          this.toast.success("Cập nhật banner thành công", "Successfully")
+          this.closeDialog()
+        },
+        error: err => {
+          this.toast.error("Cập nhật banner không thành công", "Unsuccessfully")
+          this.closeDialog()
+        }
+      }) : ''
     }
   }
 
-  AddBanner() {
-    console.log(this.form.value)
-    try {
-      this.toast.success('Cập nhật thành công', 'Successfully')
-    } catch (Error) {
-      this.toast.error('Cập nhật không thành công', 'Unsuccessfully')
+  add() {
+    if (this.form.valid) {
+      (this.pathName === '/banner') ?
+      this.BannerService.postBanner(this.form.value).subscribe({
+        next: data => {
+          this.toast.success("Thêm banner thành công", "Successfully")
+          this.closeDialog()
+        },
+        error: err => {
+          this.toast.error("Thêm banner không thành công", "Error")
+          this.closeDialog()
+        }
+      }) : ''
     }
   }
 }

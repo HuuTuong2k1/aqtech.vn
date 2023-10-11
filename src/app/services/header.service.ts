@@ -23,7 +23,7 @@ export class HeaderService {
     return this.http.put(`/api/Header/${id}`, data, { responseType: 'text' });
   }
 
-  public deleteHeader(id: number): Observable<string> {
+  public deleteHeader(id: any): Observable<string> {
     return this.http.delete(`/api/Header/${id}`, { responseType: 'text' }).pipe(
       map(() => 'Xóa header thành công'), // Trả về một chuỗi văn bản sau khi xóa thành công
       catchError((error) => {
@@ -33,4 +33,4 @@ export class HeaderService {
     );
   }
 
- }
+}

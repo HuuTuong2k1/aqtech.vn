@@ -50,9 +50,12 @@ export class CommentsComponent implements OnInit, AfterViewInit{
     // this.dataTable.paginator = this.paginator
   }
 
-  openDialogConfirmDelete(id: number) {
+  openDialogConfirmDelete(id: number, title: string) {
     this.dialog.open(ConfirmDeleteComponent, {
-      data: id
+      data: {
+        id: id,
+        title: title
+      }
     })
   }
 

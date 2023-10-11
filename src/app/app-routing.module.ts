@@ -50,11 +50,9 @@ const routes: Routes = [
       },
       {
         path: 'san-pham', component: ProductComponent, data: {name: 'Sản phẩm', breadcrumb : 'Admin > Sản phẩm'},
-        children: [
-          {
-            path: 'them-san-pham', component: FormProductComponent, data : {name: 'Thêm sản phẩm', breadcrumb : 'Admin > Sản phẩm > Thêm sản phẩm'}
-          }
-        ]
+      },
+      {
+        path: 'san-pham/them-san-pham', component: FormProductComponent, data : {name: 'Thêm sản phẩm', breadcrumb : 'Admin > Sản phẩm > Thêm sản phẩm'}
       },
       {
         path: 'tai-khoan-khach-hang', component: AccountComponent, data: {name: 'Tài khoản khách hàng', breadcrumb: 'Admin > Tài khoản khách hàng'}

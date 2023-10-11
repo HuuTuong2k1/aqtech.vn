@@ -7,71 +7,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { BannerService } from 'src/app/services/banner.service';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss']
 })
-export class BannerComponent implements AfterViewInit, OnInit{
+export class BannerComponent implements OnInit{
   title: string = ''
   breadcrumb: string = ''
-  data: Banner[] = [
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/bg-1.jpg',
-      description: 'Ảnh giáo dục',
-      link: 'assets/images/bg-1.jpg',
-      status: false
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: '',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-    {
-      image: 'assets/images/images.jpg',
-      description: 'Ảnh kinh doanh',
-      link: 'assets/images/images.jpg',
-      status: true
-    },
-  ]
 
   Columns: string[] = [
     'no',
@@ -82,16 +27,15 @@ export class BannerComponent implements AfterViewInit, OnInit{
     'active'
   ];
 
-  dataTable!: MatTableDataSource<any>
+  dataTable!: MatTableDataSource<Banner>
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private dialog: MatDialog,
     private toast: ToastrService,
     private activeRoute: ActivatedRoute,
-  ){
-    this.dataTable = new MatTableDataSource(this.data)
-  }
+    private BannerService: BannerService
+  ){}
 
   ngOnInit(): void {
     const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
@@ -99,10 +43,8 @@ export class BannerComponent implements AfterViewInit, OnInit{
       routeData['name'] ? this.title = routeData['name'] : this.title = ''
       routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
     }
-  }
 
-  ngAfterViewInit(): void {
-    this.dataTable.paginator = this.paginator
+    this.getBanner()
   }
 
   applyFilter(event: Event) {
@@ -115,18 +57,55 @@ export class BannerComponent implements AfterViewInit, OnInit{
   }
 
   openDialogEdit(data: any) {
-    this.dialog.open(FormBannerCustomerComponent, {
+    const dialogRef = this.dialog.open(FormBannerCustomerComponent, {
       data: data
+    })
+    dialogRef.afterClosed().subscribe(res => {
+      this.getBanner()
     })
   }
 
-  openDialogConfirmDelete(data: any) {
-    this.dialog.open(ConfirmDeleteComponent, {
-      data: data
+  openDialogConfirmDelete(id: number, title: string) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: {
+        id: id,
+        title: title
+      }
+    })
+    dialogRef.afterClosed().subscribe(res => {
+      this.getBanner()
     })
   }
 
-  openFormAddBanner() {
-    this.dialog.open(FormBannerCustomerComponent)
+  openFormAddBannerCustomer() {
+    const dialogRef = this.dialog.open(FormBannerCustomerComponent)
+    dialogRef.afterClosed().subscribe(res => {
+      this.getBanner()
+    })
+  }
+
+  getBanner() {
+    this.BannerService.getBanner().subscribe({
+      next: data => {
+        this.dataTable = new MatTableDataSource(data)
+        this.dataTable.paginator = this.paginator
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+  }
+
+  updateStatus(newStatus: boolean, data: any, id: number) {
+    data.isHienThi = newStatus
+    this.BannerService.putBanner(data, id).subscribe({
+      next: res => {
+        this.toast.success('Cập nhật trạng thái thành công', 'Successfully')
+        this.getBanner()
+      },
+      error: err => {
+        this.toast.error('Cập nhật trạng thái không thành công', 'Unsuccessfullt')
+      }
+    })
   }
 }

@@ -1,4 +1,4 @@
-<form class="form-add-banner" [formGroup]="form" (ngSubmit)="data ? updateBanner() : AddBanner()">
+<form class="form-add-banner" [formGroup]="form" (ngSubmit)="data ? update(data.id) : add()">
   <div class="p-4">
     <header>
       {{data ? "Chỉnh sửa" : "Thêm mới"}}
@@ -10,34 +10,35 @@
   <div class="p-4">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Hình ảnh</label>
-      <input formControlName="image" class="form-control" type="file">
+      <input formControlName="hinhDaiDien" class="form-control" type="file">
     </div>
     <div class="mb-3 d-flex" *ngIf="data && data.image != ''">
-      <img width="20%" src="{{data.image}}" alt="">
+      <!-- <img width="20%" src="{{data.hinhDaiDien}}" alt=""> -->
+      {{data.hinhDaiDien}}
     </div>
     <div class="mb-3">
       <mat-form-field class="example-full-width">
         <mat-label>Mô tả</mat-label>
-        <textarea formControlName="des" matInput placeholder="Nhập mô tả"></textarea>
+        <textarea formControlName="noiDung" matInput placeholder="Nhập mô tả"></textarea>
       </mat-form-field>
-      <mat-error *ngIf="form.get('des')?.hasError('required') && form.get('des')?.touched">
+      <mat-error *ngIf="form.get('noiDung')?.hasError('required') && form.get('noiDung')?.touched">
         Bạn chưa nhập mô tả
       </mat-error>
     </div>
     <div class="mb-3">
       <mat-form-field class="example-full-width">
         <mat-label>Link ảnh</mat-label>
-        <input matInput formControlName="link" placeholder="Nhập link ảnh">
-        <mat-icon matSuffix [class.icon-error]="form.get('link')?.hasError('required') && form.get('link')?.touched">link</mat-icon>
+        <input matInput formControlName="urlbanner" placeholder="Nhập link ảnh">
+        <mat-icon matSuffix [class.icon-error]="form.get('urlbanner')?.hasError('required') && form.get('urlbanner')?.touched">link</mat-icon>
       </mat-form-field>
-      <mat-error *ngIf="form.get('link')?.hasError('required') && form.get('link')?.touched">
+      <mat-error *ngIf="form.get('urlbanner')?.hasError('required') && form.get('urlbanner')?.touched">
         Bạn chưa nhập mô tả
       </mat-error>
     </div>
     <div class="row mb-3">
       <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
       <div class="col-sm-9 align-self-center">
-        <mat-slide-toggle [checked] = "checked" formControlName="status"></mat-slide-toggle>
+        <mat-slide-toggle [checked] = "checked" formControlName="isHienThi"></mat-slide-toggle>
       </div>
     </div>
     <div class="d-flex gap-2 justify-content-end">
