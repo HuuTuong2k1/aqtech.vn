@@ -104,7 +104,7 @@ export class BannerComponent implements OnInit{
         this.getBanner()
       },
       error: err => {
-        this.toast.error('Cập nhật trạng thái không thành công', 'Unsuccessfullt')
+        this.toast.error('Cập nhật trạng thái không thành công', 'Unsuccessfully')
       }
     })
   }

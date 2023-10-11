@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderService } from 'src/app/services/header.service';
 import { catchError, map } from 'rxjs';
+import { Header } from 'src/app/interfaces/header';
 
 @Component({
   selector: 'app-form-header',
@@ -13,6 +14,7 @@ import { catchError, map } from 'rxjs';
 export class FormHeaderComponent implements OnInit{
   form!: FormGroup
   checked: boolean = true
+  listHeader: Header[] = []
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,6 +25,7 @@ export class FormHeaderComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.fetchHeader()
     this.form = this.formfb.group({
       createdBy: ['Admin', Validators.required],
       ten: [this.data ? this.data.ten : '', Validators.required],
@@ -35,6 +38,17 @@ export class FormHeaderComponent implements OnInit{
 
   closeDialog() {
     this.dialogRef.close()
+  }
+
+  fetchHeader() {
+    this.HeaderService.getHeader().subscribe({
+      next: data => {
+        this.listHeader = data
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
 
   AddHeader() {

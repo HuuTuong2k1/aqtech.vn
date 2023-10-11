@@ -23,10 +23,9 @@
         <mat-label>Danh mục cha</mat-label>
         <mat-select formControlName="danhMucCha">
           <mat-option value="">Không có</mat-option>
-          <mat-option value="Home">Home</mat-option>
-          <mat-option value="Product">Product</mat-option>
-          <mat-option value="About Us">About Us</mat-option>
-          <mat-option value="Contact Us">Contact Us</mat-option>
+          <ng-container *ngFor="let header of listHeader">
+            <mat-option value="{{header.ten}}">{{header.ten}}</mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
     </div>

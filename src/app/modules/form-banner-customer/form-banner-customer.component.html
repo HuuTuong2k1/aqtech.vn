@@ -28,7 +28,8 @@
     <div class="mb-3">
       <mat-form-field class="example-full-width">
         <mat-label>Link ảnh</mat-label>
-        <input matInput formControlName="urlbanner" placeholder="Nhập link ảnh">
+        <input *ngIf="pathName === '/banner'" matInput formControlName="urlbanner" placeholder="Nhập link ảnh">
+        <input *ngIf="pathName === '/doi-tac' || pathName === '/khach-hang'" matInput formControlName="urldoiTac" placeholder="Nhập link ảnh">
         <mat-icon matSuffix [class.icon-error]="form.get('urlbanner')?.hasError('required') && form.get('urlbanner')?.touched">link</mat-icon>
       </mat-form-field>
       <mat-error *ngIf="form.get('urlbanner')?.hasError('required') && form.get('urlbanner')?.touched">

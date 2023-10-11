@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HeaderService } from 'src/app/services/header.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { BannerService } from 'src/app/services/banner.service';
+import { PartnerService } from 'src/app/services/partner.service';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -19,7 +20,8 @@ export class ConfirmDeleteComponent implements OnInit{
     private toast: ToastrService,
     private HeaderService: HeaderService,
     private CommentService: CommentService,
-    private BannerService: BannerService
+    private BannerService: BannerService,
+    private PartnerService: PartnerService
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,7 @@ export class ConfirmDeleteComponent implements OnInit{
   }
 
   deleteItem(id: any, title: string) {
+    // console.log(id)
     switch (title) {
       case 'Header' : {
         this.HeaderService.deleteHeader(id).subscribe({
@@ -67,6 +70,20 @@ export class ConfirmDeleteComponent implements OnInit{
             this.dialogRef.close();
           }
         });
+        break
+      }
+      case 'Đối tác':
+      case 'Khách hàng': {
+        this.PartnerService.deleteData(id).subscribe({
+          next: data => {
+            this.toast.success("Xóa thành công", "Successfully")
+            this.dialogRef.close()
+          },
+          error: err => {
+            this.toast.error("Xóa không thành công", "Unsuccessfully")
+            this.dialogRef.close()
+          }
+        })
         break
       }
       default: {

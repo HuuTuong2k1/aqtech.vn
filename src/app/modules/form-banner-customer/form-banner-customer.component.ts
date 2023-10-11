@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Validators } from '@angular/forms';
 import { BannerService } from 'src/app/services/banner.service';
 import { ActivatedRoute } from '@angular/router';
+import { PartnerService } from 'src/app/services/partner.service';
 
 @Component({
   selector: 'app-form-banner-customer',
@@ -23,10 +24,15 @@ export class FormBannerCustomerComponent {
     private formfb: FormBuilder,
     private toast: ToastrService,
     private BannerService: BannerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private PartnerService: PartnerService
   ){}
 
   ngOnInit(): void {
+    (this.data && this.data.hinhDaiDien) ? this.oldImage = this.data.hinhDaiDien : '';
+    this.pathName = window.location.pathname;
+
+    (this.pathName === '/banner') ?
     this.form = this.formfb.group({
       hinhDaiDien: [''],
       noiDung: [this.data ? this.data.noiDung : '', Validators.required],
@@ -34,11 +40,17 @@ export class FormBannerCustomerComponent {
       isHienThi: [this.data ? this.data.isHienThi : this.checked, Validators.required],
       createdTime: [new Date().toISOString(), Validators.required],
       createdBy: ['Admin', Validators.required]
-    });
-
-    console.log(this.data);
-    (this.data && this.data.hinhDaiDien) ? this.oldImage = this.data.hinhDaiDien : '';
-    this.pathName = window.location.pathname
+    }) :
+    this.form = this.formfb.group({
+      hinhDaiDien: [''],
+      noiDung: [this.data ? this.data.noiDung : '', Validators.required],
+      urldoiTac: [this.data ? this.data.urldoiTac : '', Validators.required],
+      isHienThi: [this.data ? this.data.isHienThi : this.checked, Validators.required],
+      createdTime: [new Date().toISOString(), Validators.required],
+      createdBy: ['Admin', Validators.required],
+      danhMuc: ['danhMuc', Validators.required],
+      loai: [this.pathName === "/doi-tac" ? 'Đối tác' : 'Khách hàng', Validators.required]
+    })
   }
 
   closeDialog() {
@@ -58,7 +70,19 @@ export class FormBannerCustomerComponent {
           this.toast.error("Cập nhật banner không thành công", "Unsuccessfully")
           this.closeDialog()
         }
-      }) : ''
+      }) :
+      this.form.value.id = id
+      // Chỗ này cần fix lại ở back-end: bởi vì lúc này trong form cần phải có trường id mới put được
+      this.PartnerService.putData(this.form.value, id).subscribe({
+        next: data => {
+          this.toast.success("Cập nhật thành công", "Successfully")
+          this.closeDialog()
+        },
+        error: err => {
+          this.toast.error("Cập nhật không thành công", "Unsuccessfully")
+          this.closeDialog()
+        }
+      })
     }
   }
 
@@ -74,7 +98,17 @@ export class FormBannerCustomerComponent {
           this.toast.error("Thêm banner không thành công", "Error")
           this.closeDialog()
         }
-      }) : ''
+      }) :
+      this.PartnerService.postData(this.form.value).subscribe({
+        next: data => {
+          this.toast.success("Thêm thành công","Successfully")
+          this.closeDialog()
+        },
+        error: err => {
+          this.toast.error("Thêm không thành công", "Unsuccessfully")
+          this.closeDialog()
+        }
+      })
     }
   }
 }

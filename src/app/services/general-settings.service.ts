@@ -10,4 +10,8 @@ export class GeneralSettingsService {
   constructor(
     private http: HttpClient
   ) { }
+
+  public getThietLapChung(): Observable<any> {
+    return this.http.get('/api/ThietLapChung/1')
+  }
 }
