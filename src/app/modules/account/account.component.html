@@ -7,7 +7,7 @@
             <span class="title">{{title}}</span>
             <span class="site-map-current">{{breadcrumb}}</span>
           </div>
-          <button *ngIf="title === 'Tài khoản khách hàng'" class="btn btn-add d-flex" (click)="openFormAddAccount()">
+          <button *ngIf="title === 'Tài khoản'" class="btn btn-add d-flex" (click)="openFormAddAccount()">
             Thêm mới
             <mat-icon>add</mat-icon>
           </button>
@@ -22,7 +22,7 @@
           <div class="col">
             <div class="form-header">
               <span>
-                Quản lý tài khoản người dùng
+                Quản lý tài khoản
               </span>
             </div>
           </div>
@@ -49,7 +49,7 @@
 
                 <ng-container matColumnDef="fullname">
                   <th mat-header-cell *matHeaderCellDef>Họ tên</th>
-                  <td mat-cell *matCellDef="let row">{{row.fullname}}</td>
+                  <td mat-cell *matCellDef="let row">{{row.hoTen}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
@@ -59,19 +59,29 @@
 
                 <ng-container matColumnDef="phone">
                   <th mat-header-cell *matHeaderCellDef>Số điện thoại</th>
-                  <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row.soDienThoai}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="sex">
                   <th mat-header-cell *matHeaderCellDef>Giới tính</th>
-                  <td mat-cell *matCellDef="let row"> {{row.sex ? row.sex : 'Ẩn'}} </td>
+                  <td mat-cell *matCellDef="let row">
+                    <ng-container *ngIf="row.gioiTinh === true, else Nu">
+                      Nam
+                    </ng-container>
+                    <ng-template #Nu>
+                      <ng-container *ngIf="row.gioiTinh === false; else hidden">
+                        Nữ
+                      </ng-container>
+                      <ng-template #hidden>
+                        Ẩn giới tính
+                      </ng-template>
+                    </ng-template>
+                  </td>
                 </ng-container>
 
-                <ng-container matColumnDef="status">
-                  <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
-                  <td mat-cell *matCellDef="let row">
-                    <mat-slide-toggle [checked]="row.status"></mat-slide-toggle>
-                  </td>
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef>Loại TK</th>
+                  <td mat-cell *matCellDef="let row">{{row.isAdmin === true ? 'Admin' : 'Khách Hàng'}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="active">
@@ -79,7 +89,7 @@
                   <td mat-cell *matCellDef="let row">
                     <div class="active">
                       <mat-icon (click)="openDialogEdit(row)">edit</mat-icon>
-                      <mat-icon (click)="openDialogConfirmDelete(row)">delete</mat-icon>
+                      <mat-icon (click)="openDialogConfirmDelete(row.id, title)">delete</mat-icon>
                     </div>
                   </td>
                 </ng-container>

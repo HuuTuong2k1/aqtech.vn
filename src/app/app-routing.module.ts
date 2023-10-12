@@ -55,7 +55,7 @@ const routes: Routes = [
         path: 'san-pham/them-san-pham', component: FormProductComponent, data : {name: 'Thêm sản phẩm', breadcrumb : 'Admin > Sản phẩm > Thêm sản phẩm'}
       },
       {
-        path: 'tai-khoan-khach-hang', component: AccountComponent, data: {name: 'Tài khoản khách hàng', breadcrumb: 'Admin > Tài khoản khách hàng'}
+        path: 'tai-khoan-khach-hang', component: AccountComponent, data: {name: 'Tài khoản', breadcrumb: 'Admin > Tài khoản'}
       },
       {
         path: 'download', component: DownloadComponent, data: {name: 'Download', breadcrumb: 'Admin > Download'}

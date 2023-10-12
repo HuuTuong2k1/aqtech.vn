@@ -6,90 +6,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Account } from 'src/app/interfaces/account';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 import { ActivatedRoute } from '@angular/router';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements AfterViewInit, OnInit{
+export class AccountComponent implements OnInit{
 
   title: string = ''
   breadcrumb: string = ''
-  data: Account[] = [
-    {
-      fullname: "Nguyễn Hữu Tường",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: true
-    },
-    {
-      fullname: "Nguyễn Hữu Long",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: false
-    },
-    {
-      fullname: "Nguyễn Hữu Thịnh",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: true
-    },
-    {
-      fullname: "Phạm Minh Lâm",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: false
-    },
-    {
-      fullname: "Nguyễn Thị Kim Tuyến",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nữ',
-      pass: '1234',
-      status: true
-    },
-    {
-      fullname: "Lê Trường An",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: true
-    },
-    {
-      fullname: "Dương Hữu Khanh",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: false
-    },
-    {
-      fullname: "Nguyễn Hoàng Trung",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: 'Nam',
-      pass: '1234',
-      status: true
-    },
-    {
-      fullname: "Nguyễn Vũ Phương",
-      email: "nhtuong2001@gmail.com",
-      phone: "0939566579",
-      sex: '',
-      pass: '1234',
-      status: true
-    },
-  ]
+  data: Account[] = []
 
   Columns: string[] = [
     'no',
@@ -97,7 +25,7 @@ export class AccountComponent implements AfterViewInit, OnInit{
     'email',
     'phone',
     'sex',
-    'status',
+    'type',
     'active'
   ]
 
@@ -107,11 +35,12 @@ export class AccountComponent implements AfterViewInit, OnInit{
   constructor(
     private dialog: MatDialog,
     private activeRoute: ActivatedRoute,
+    private AccountService:AccountService
   ) {
-    this.dataTable = new MatTableDataSource(this.data)
   }
 
   ngOnInit(): void {
+    this.fetchData()
     const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
     if (routeData) {
       routeData['name'] ? this.title = routeData['name'] : this.title = ''
@@ -119,20 +48,25 @@ export class AccountComponent implements AfterViewInit, OnInit{
     }
   }
 
-  ngAfterViewInit(): void {
-    this.dataTable.paginator = this.paginator
-  }
-
   openDialogEdit(data: any) {
-    console.log(data)
-    this.dialog.open(FormAccountComponent, {
+    const dialogRef = this.dialog.open(FormAccountComponent, {
       data: data
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchData()
     })
   }
 
-  openDialogConfirmDelete(data: any) {
-    this.dialog.open(ConfirmDeleteComponent, {
-      data: data
+  openDialogConfirmDelete(id: number, title: string) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: {
+        id: id,
+        title: title
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchData()
     })
   }
 
@@ -145,6 +79,21 @@ export class AccountComponent implements AfterViewInit, OnInit{
   }
 
   openFormAddAccount() {
-    this.dialog.open(FormAccountComponent)
+    const dialogRef = this.dialog.open(FormAccountComponent)
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchData()
+    })
+  }
+
+  fetchData() {
+    this.AccountService.getData().subscribe({
+      next: data => {
+        this.dataTable = new MatTableDataSource(data)
+        this.dataTable.paginator = this.paginator
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
 }

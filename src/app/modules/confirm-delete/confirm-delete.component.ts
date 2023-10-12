@@ -5,6 +5,7 @@ import { HeaderService } from 'src/app/services/header.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { BannerService } from 'src/app/services/banner.service';
 import { PartnerService } from 'src/app/services/partner.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -21,7 +22,8 @@ export class ConfirmDeleteComponent implements OnInit{
     private HeaderService: HeaderService,
     private CommentService: CommentService,
     private BannerService: BannerService,
-    private PartnerService: PartnerService
+    private PartnerService: PartnerService,
+    private AccountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +87,20 @@ export class ConfirmDeleteComponent implements OnInit{
           }
         })
         break
+      }
+      case 'Tài khoản': {
+        this.AccountService.deleteData(id).subscribe({
+          next: data => {
+            this.toast.success("Xóa thành công", "Successfully")
+            this.dialogRef.close()
+          },
+          error: err => {
+            console.log(err)
+            this.toast.error("Xóa không thành công", "Unsuccessfully")
+            this.dialogRef.close()
+          }
+        })
+        break;
       }
       default: {
         console.log("Ko cos")
