@@ -27,43 +27,37 @@
       <div class="container-fluid p-0 mt-2">
         <form [formGroup]="form" (ngSubmit)="addProduct()" class="container-fluid product-form">
           <div class="row">
-            <div class="col-8">
-              <div class="row mb-4">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Tên sản phẩm</label>
-                <div class="col-sm-9">
-                  <input class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
-                </div>
+            <div class="col-6">
+              <div class="row mb-3">
+                <input class="form-control form-control-lg" type="text" placeholder="Tên sản phẩm" aria-label=".form-control-lg example">
               </div>
-              <div class="row mb-2">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Hình ảnh</label>
-                <div class="col-sm-9">
-                  <input class="form-control" id="formFileSm" type="file">
+              <div class="row mb-3">
+                <div class="col-6 d-flex">
+                  <label for="inputEmail3" class="col-sm-5 col-form-label">Trạng thái</label>
+                  <div class="col-sm-7 text-center align-self-center">
+                    <mat-slide-toggle formControlName="isHienThi"></mat-slide-toggle>
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-4">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3">
-                  <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
+                <div class="col-6 d-flex">
+                  <label for="inputEmail3" class="col-sm-5 col-form-label">Nổi bật</label>
+                  <div class="col-sm-7 text-center align-self-center">
+                    <mat-slide-toggle formControlName="isNoiBat"></mat-slide-toggle>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="row mb-4">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
-                <div class="col-sm-9 text-center align-self-center">
-                  <mat-slide-toggle></mat-slide-toggle>
-                </div>
+            <div class="col-6">
+              <div class="input-group custom-file-button">
+                <label class="input-group-text" for="inputGroupFile">Hình ảnh</label>
+                <input type="file" class="form-control form-control-lg" id="formFileLg" formControlName="hinhDaiDien">
               </div>
-              <div class="row mb-4">
-                <label for="inputEmail3" class="col-sm-3 col-form-label">Nổi bật</label>
-                <div class="col-sm-9 text-center align-self-center">
-                  <mat-slide-toggle></mat-slide-toggle>
-                </div>
+              <div class="mb-3 d-flex" *ngIf="data && data.hinhDaiDien != ''">
+                {{data.hinhDaiDien}}
               </div>
             </div>
           </div>
           <div class="row">
-            <angular-editor [placeholder]="'Enter text here...'" [config]="config"></angular-editor>
+            <angular-editor [placeholder]="'Nhập nội dung mô tả sản phẩm'" formControlName="noiDung" [config]="config"></angular-editor>
           </div>
           <div class="row">
             <div class="col">

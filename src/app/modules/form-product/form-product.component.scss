@@ -9,9 +9,23 @@ $ffff: #ffff;
     margin: 0;
     padding: 40px 20px;
 
+    .field-img {
+      padding: 0 12px;
+    }
+
+    input {
+      &::placeholder {
+        font-size: 17px;
+      }
+    }
+
     label {
       font-size: 15px;
       font-weight: 700;
+    }
+
+    mat-form-field {
+      width: 100%;
     }
 
     .btn-main {
@@ -28,6 +42,26 @@ $ffff: #ffff;
 
     .hex {
       font-weight: 600;
+    }
+
+    .custom-file-button {
+      input[type="file"] {
+        margin-left: -2px !important;
+
+        &::-webkit-file-upload-button {
+          display: none;
+        }
+        &::file-selector-button {
+          display: none;
+        }
+      }
+
+      &:hover {
+        label {
+          background-color: #dde0e3;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

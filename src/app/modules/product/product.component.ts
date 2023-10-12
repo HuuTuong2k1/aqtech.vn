@@ -6,6 +6,7 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -31,7 +32,8 @@ export class ProductComponent implements OnInit{
   constructor(
     private dialog: MatDialog,
     private activeRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private route: Router
   ) {
 
   }
@@ -58,6 +60,14 @@ export class ProductComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       this.fetchData()
+    })
+  }
+
+  openFormEdit(id: number) {
+    this.route.navigate(['/san-pham/them-san-pham'], {
+      queryParams: {
+        id: id
+      }
     })
   }
 

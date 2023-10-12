@@ -16,6 +16,14 @@ export class ProductService {
   }
 
   public deleteData(id: number): Observable<string> {
-    return this.http.delete(`/api/sanPham/${id}`, { responseType: 'text' })
+    return this.http.delete(`/api/SanPham/${id}`, { responseType: 'text' })
+  }
+
+  public getDataById(id: number): Observable<any> {
+    return this.http.get(`/api/SanPham/${id}`)
+  }
+
+  public postData(data: any): Observable<any> {
+    return this.http.post('/api/SanPham', data, { responseType: 'text' })
   }
 }
