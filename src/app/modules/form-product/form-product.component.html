@@ -11,7 +11,7 @@
       </div>
     </div>
   </div>
-  <div class="row banner-contain">
+  <div class="row product-form-contain">
     <div class="col">
       <div class="container-fluid p-0">
         <div class="row">
@@ -25,7 +25,55 @@
         </div>
       </div>
       <div class="container-fluid p-0 mt-2">
-
+        <form [formGroup]="form" (ngSubmit)="addProduct()" class="container-fluid product-form">
+          <div class="row">
+            <div class="col-8">
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Tên sản phẩm</label>
+                <div class="col-sm-9">
+                  <input class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
+                </div>
+              </div>
+              <div class="row mb-2">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Hình ảnh</label>
+                <div class="col-sm-9">
+                  <input class="form-control" id="formFileSm" type="file">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Trạng thái</label>
+                <div class="col-sm-9 text-center align-self-center">
+                  <mat-slide-toggle></mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Nổi bật</label>
+                <div class="col-sm-9 text-center align-self-center">
+                  <mat-slide-toggle></mat-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <angular-editor [placeholder]="'Enter text here...'" [config]="config"></angular-editor>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-main float-end d-flex gap-2">
+                <mat-icon>save_alt</mat-icon>
+                Cập nhật
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

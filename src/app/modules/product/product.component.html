@@ -78,7 +78,7 @@
                   <td mat-cell *matCellDef="let row" style="width: 20%;">
                     <div class="active-btn">
                       <mat-icon>edit</mat-icon>
-                      <mat-icon (click)="openDialogConfirmDelete(row)">delete</mat-icon>
+                      <mat-icon (click)="openDialogConfirmDelete(row.id, title)">delete</mat-icon>
                     </div>
                   </td>
                 </ng-container>

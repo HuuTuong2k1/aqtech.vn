@@ -43,6 +43,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { FormDownloadComponent } from './modules/form-download/form-download.component';
 import { FormProductComponent } from './modules/form-product/form-product.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { FormProductComponent } from './modules/form-product/form-product.compon
     MatRadioModule,
     MatSelectModule,
     HttpClientModule,
+    AngularEditorModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

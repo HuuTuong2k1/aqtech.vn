@@ -1,65 +1,23 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/interfaces/product';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, AfterViewInit{
+export class ProductComponent implements OnInit{
   dataTable!: MatTableDataSource<Product>
   title: string = ''
   breadcrumb: string = ''
 
-  data: Product[] = [
-    {
-      tenDanhMuc: "MCMix-Pro",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-    {
-      tenDanhMuc: "MCMix-Pro",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-    {
-      tenDanhMuc: "MCMix-Pro",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-    {
-      tenDanhMuc: "MCMix-Pro",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-    {
-      tenDanhMuc: "MCMix-Pro",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-    {
-      tenDanhMuc: "MCMix-Pro",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-    {
-      tenDanhMuc: "Edusoft.NET",
-      hinhDaiDien: "assets/images/VMU.png",
-      isHienThi: true,
-      isNoiBat: true
-    },
-  ]
+  data: Product[] = []
 
   Columns: string[] = [
     'No',
@@ -73,6 +31,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
   constructor(
     private dialog: MatDialog,
     private activeRoute: ActivatedRoute,
+    private productService: ProductService
   ) {
 
   }
@@ -80,22 +39,25 @@ export class ProductComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
   ngOnInit(): void {
+    this.fetchData()
     const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
     if (routeData) {
       routeData['name'] ? this.title = routeData['name'] : this.title = ''
       routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
     }
-    this.dataTable = new MatTableDataSource(this.data)
-    this.dataTable.paginator = this.paginator
-  }
-
-  ngAfterViewInit(): void {
 
   }
 
-  openDialogConfirmDelete(id: number) {
-    this.dialog.open(ConfirmDeleteComponent, {
-      data: id
+  openDialogConfirmDelete(id: number, title: string) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: {
+        id: id,
+        title: title
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchData()
     })
   }
 
@@ -105,5 +67,17 @@ export class ProductComponent implements OnInit, AfterViewInit{
     if (this.dataTable.paginator) {
       this.dataTable.paginator.firstPage()
     }
+  }
+
+  fetchData() {
+    this.productService.getData().subscribe({
+      next: data => {
+        this.dataTable = new MatTableDataSource(data)
+        this.dataTable.paginator = this.paginator
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
   }
 }

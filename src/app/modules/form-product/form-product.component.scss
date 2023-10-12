@@ -1,0 +1,33 @@
+$main-color: #009047;
+$ffff: #ffff;
+
+.product-form-contain {
+
+  .product-form {
+    background-color: $ffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 40px 20px;
+
+    label {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .btn-main {
+      margin-top: 20px;
+      background-color: $main-color;
+      color: $ffff;
+    }
+
+    .theme {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+
+    .hex {
+      font-weight: 600;
+    }
+  }
+}
