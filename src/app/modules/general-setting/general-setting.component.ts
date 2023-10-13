@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GeneralSettingsService } from 'src/app/services/general-settings.service';
+import { Settings } from 'src/app/interfaces/settings';
 
 @Component({
   selector: 'app-general-setting',
@@ -11,9 +12,12 @@ import { GeneralSettingsService } from 'src/app/services/general-settings.servic
 export class GeneralSettingComponent implements OnInit{
   title: string = ''
   breadcrumb: string = ''
-  color: string = '#009047'
+  color: string = ''
   checked: boolean = true
   form!: FormGroup
+  data: Settings[] = []
+  oldLogo: string = ''
+  oldFavicon: string = ''
   enable_items: string[] = [
     'Banner',
     'Header',
@@ -32,20 +36,17 @@ export class GeneralSettingComponent implements OnInit{
 
   ngOnInit(): void {
     this.fetchData()
-
     const routeData = this.activeRoute.snapshot.data; // Lấy dữ liệu của tuyến đường
     if (routeData) {
       routeData['name'] ? this.title = routeData['name'] : this.title = ''
       routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
     }
-
     this.form = this.formfb.group({
-      namewebsite : ['', Validators.required],
-      logo : ['', Validators.required],
-      theme : ['', Validators.required],
+      tenWebsite : ['', Validators.required],
+      logoLink : ['', Validators.required],
+      maTheme : ['', Validators.required],
       title : ['', Validators.required],
       favicon: ['', Validators.required],
-      status: [this.checked, Validators.required]
     })
   }
 
@@ -58,22 +59,31 @@ export class GeneralSettingComponent implements OnInit{
   }
 
   changeStatus(event: any) {
-    // Lấy giá trị checked từ sự kiện thay đổi
     const isChecked = event.checked;
-
-    // Cập nhật giá trị của trường 'status' trong FormGroup
     this.form.patchValue({ status: isChecked });
   }
 
-  submitForm() {
-    this.form.value['theme'] = this.color
-    console.log(this.form.value)
+  updateSettings() {
+    this.form.value['maTheme'] = this.color
+    this.form.value['favicon'] ? this.form.value['favicon'] : this.form.value['favicon'] = this.oldFavicon
+    this.form.value['logoLink'] ? this.form.value['logoLink'] : this.form.value['logoLink'] = this.oldLogo
+    // Chỗ này lỗi nhé, cần phải check valid trước khi lấy xử lý giá trị form
+    // if(this.form.valid) {
+      console.log(this.form.value);
+    // }
   }
 
   fetchData() {
     this.general.getThietLapChung().subscribe({
       next: data => {
-        console.log(data)
+        this.color = data[0].maTheme
+        this.oldFavicon = data[0].favicon
+        this.oldLogo = data[0].logoLink
+        this.form.patchValue({
+          tenWebsite : data[0].tenWebsite,
+          title : data[0].title,
+          maTheme: data[0].maTheme
+        })
       },
       error: err => {
         console.log(err)

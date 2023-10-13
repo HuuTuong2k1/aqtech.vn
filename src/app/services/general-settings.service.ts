@@ -12,6 +12,6 @@ export class GeneralSettingsService {
   ) { }
 
   public getThietLapChung(): Observable<any> {
-    return this.http.get('/api/ThietLapChung/1')
+    return this.http.get('/api/ThietLapChung')
   }
 }

@@ -25,38 +25,39 @@
             </div>
           </div>
         </div>
-        <form [formGroup]="form" (ngSubmit)="submitForm()" class="container-fluid general-settings-form">
+        <form [formGroup]="form" (ngSubmit)="updateSettings()" class="container-fluid general-settings-form">
           <div class="row">
             <div class="col-6">
               <div class="row mb-4">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Tên Website</label>
                 <div class="col-sm-9">
-                  <input formControlName="namewebsite" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
+                  <input formControlName="tenWebsite" class="form-control" placeholder="Công ty TNHH Công Nghệ Anh Quân">
                 </div>
               </div>
               <div class="row mb-2">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Logo</label>
                 <div class="col-sm-9">
-                  <input formControlName="logo" class="form-control" id="formFileSm" type="file">
+                  <input formControlName="logoLink" class="form-control" id="formFileSm" type="file">
                 </div>
               </div>
               <div class="row mb-4">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3">
-                  <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
+                  <!-- <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt=""> -->
+                  {{oldLogo}}
                 </div>
                 <label for="inputEmail3" class="col-sm-3 col-form-label text-end">Trạng thái</label>
                 <div class="col-sm-3 align-self-center">
-                  <mat-slide-toggle formControlName="status" (change)="changeStatus($event)"></mat-slide-toggle>
+                  <mat-slide-toggle (change)="changeStatus($event)"></mat-slide-toggle>
                 </div>
               </div>
               <div class="row mb-4">
                 <label for="inputEmail3" class="col-sm-3 col-form-label align-self-center">Theme</label>
                 <div class="col-sm-9 d-flex align-items-center gap-5">
                   <mat-icon [style.color]="color"> format_color_fill</mat-icon>
-                  <input type="text" formControlName="theme" class="form-control theme" [(colorPicker)]="color" [style.background]="color"/>
+                  <input type="hidden" type="text" formControlName="maTheme" class="form-control theme" [(colorPicker)]="color" [style.background]="color"/>
                   <span class="hex">
-                    Mã HEX: <p [style.color]="color" class="m-0">{{color}}</p>
+                    Mã Theme: <p [style.color]="color" class="m-0">{{color}}</p>
                   </span>
                 </div>
               </div>
@@ -65,7 +66,7 @@
               <div class="row mb-4">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Title</label>
                 <div class="col-sm-9">
-                  <input formControlName="title" type="text" class="form-control" id="inputEmail3" placeholder="Công ty TNHH Công Nghệ Anh Quân">
+                  <input formControlName="title" type="text" class="form-control" placeholder="Công ty TNHH Công Nghệ Anh Quân">
                 </div>
               </div>
               <div class="row mb-2">
@@ -77,7 +78,8 @@
               <div class="row mb-4">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3">
-                  <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt="">
+                  <!-- <img width="100%" src="../../../assets/images/Logo_AQTech (1).png" alt=""> -->
+                  {{oldFavicon}}
                 </div>
               </div>
             </div>
