@@ -34,7 +34,7 @@ export class FormBannerCustomerComponent {
 
     (this.pathName === '/banner') ?
     this.form = this.formfb.group({
-      hinhDaiDien: [''],
+      hinhDaiDien: ['', Validators.required],
       noiDung: [this.data ? this.data.noiDung : '', Validators.required],
       urlbanner: [this.data ? this.data.urlbanner : '', Validators.required],
       isHienThi: [this.data ? this.data.isHienThi : this.checked, Validators.required],
@@ -42,7 +42,7 @@ export class FormBannerCustomerComponent {
       createdBy: ['Admin', Validators.required]
     }) :
     this.form = this.formfb.group({
-      hinhDaiDien: [''],
+      hinhDaiDien: ['', Validators.required],
       noiDung: [this.data ? this.data.noiDung : '', Validators.required],
       urldoiTac: [this.data ? this.data.urldoiTac : '', Validators.required],
       isHienThi: [this.data ? this.data.isHienThi : this.checked, Validators.required],
@@ -58,31 +58,33 @@ export class FormBannerCustomerComponent {
   }
 
   update(id: number) {
-    this.form.value['hinhDaiDien'] = this.oldImage
+    this.form.value['hinhDaiDien'] ? this.form.value['hinhDaiDien'] : this.form.value['hinhDaiDien'] = this.oldImage
     if (this.form.valid) {
-      (this.pathName === '/banner') ?
-      this.BannerService.putBanner(this.form.value, id).subscribe({
-        next: data => {
-          this.toast.success("Cập nhật banner thành công", "Successfully")
-          this.closeDialog()
-        },
-        error: err => {
-          this.toast.error("Cập nhật banner không thành công", "Unsuccessfully")
-          this.closeDialog()
-        }
-      }) :
-      this.form.value.id = id
-      // Chỗ này cần fix lại ở back-end: bởi vì lúc này trong form cần phải có trường id mới put được
-      this.PartnerService.putData(this.form.value, id).subscribe({
-        next: data => {
-          this.toast.success("Cập nhật thành công", "Successfully")
-          this.closeDialog()
-        },
-        error: err => {
-          this.toast.error("Cập nhật không thành công", "Unsuccessfully")
-          this.closeDialog()
-        }
-      })
+      if (this.pathName === '/banner') {
+        this.BannerService.putBanner(this.form.value, id).subscribe({
+          next: data => {
+            this.toast.success("Cập nhật banner thành công", "Successfully");
+            this.closeDialog();
+          },
+          error: err => {
+            this.toast.error("Cập nhật banner không thành công", "Unsuccessfully");
+            this.closeDialog();
+          }
+        });
+      } else {
+        // Chỗ này cần fix lại ở back-end: bởi vì lúc này trong form cần phải có trường id mới put được
+        this.form.value.id = id;
+        this.PartnerService.putData(this.form.value, id).subscribe({
+          next: data => {
+            this.toast.success("Cập nhật thành công", "Successfully");
+            this.closeDialog();
+          },
+          error: err => {
+            this.toast.error("Cập nhật không thành công", "Unsuccessfully");
+            this.closeDialog();
+          }
+        });
+      }
     }
   }
 

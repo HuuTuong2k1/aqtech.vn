@@ -61,6 +61,12 @@ const TREE_DATA: sidebarNode[] = [
     current: false,
   },
   {
+    name: 'Câu hỏi',
+    link: 'cau-hoi',
+    icon: 'speaker_notes',
+    current: false,
+  },
+  {
     name: 'Sản phẩm',
     link: 'san-pham',
     icon: 'production_quantity_limits',

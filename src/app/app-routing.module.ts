@@ -13,6 +13,7 @@ import { AccountComponent } from './modules/account/account.component';
 import { DownloadComponent } from './modules/download/download.component';
 import { LoginComponent } from './modules/login/login.component';
 import { FormProductComponent } from './modules/form-product/form-product.component';
+import { QuestionsComponent } from './modules/questions/questions.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,9 @@ const routes: Routes = [
       },
       {
         path: 'binh-luan', component: CommentsComponent, data: {name: 'Bình luận', breadcrumb: 'Admin > Bình luận'}
+      },
+      {
+        path: 'cau-hoi', component: QuestionsComponent, data: {name: 'Câu hỏi khách hàng', breadcrumb: 'Admin > Câu hỏi khách hàng'}
       },
       {
         path: 'san-pham', component: ProductComponent, data: {name: 'Sản phẩm', breadcrumb : 'Admin > Sản phẩm'},

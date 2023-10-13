@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './commnents.component.html',
   styleUrls: ['./commnents.component.scss']
 })
-export class CommentsComponent implements OnInit, AfterViewInit{
+export class CommentsComponent implements OnInit{
   Columns: string[] = [
     'no',
     'username',
@@ -44,10 +44,6 @@ export class CommentsComponent implements OnInit, AfterViewInit{
       routeData['breadcrumb'] ? this.breadcrumb = routeData['breadcrumb'] : this.breadcrumb = ''
     }
     this.getListComment()
-  }
-
-  ngAfterViewInit(): void {
-    // this.dataTable.paginator = this.paginator
   }
 
   openDialogConfirmDelete(id: number, title: string) {
