@@ -1,0 +1,82 @@
+<div class="container-fluid p-0">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="row breadcrumb px-2">
+        <div class="col current-url px-4">
+          <div class="d-flex flex-column gap-2">
+            <span class="title">{{title}}</span>
+            <span class="site-map-current">{{breadcrumb}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row news-form-contain">
+    <div class="col">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col">
+            <div class="form-header">
+              <span>
+                Thêm bài viết mới
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid p-0 mt-2">
+        <form [formGroup]="form" (ngSubmit)="addNews()" class="container-fluid new-form">
+          <div class="row mb-3">
+            <div class="col-6">
+              <input formControlName="tieuDe" class="form-control form-control" type="text" placeholder="Tiêu đề" aria-label=".form-control example">
+            </div>
+            <div class="col-6">
+              <div class="input-group custom-file-button">
+                <label class="input-group-text" for="inputGroupFile">Hình ảnh</label>
+                <input formControlName="hinhDaiDien" type="file" class="form-control form-control" id="formFile">
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <textarea formControlName="tomTat" placeholder="Mô tả ngắn" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-5">
+                  <label class="col-sm-5 col-form-label">Độ ưu tiên</label>
+                  <input formControlName="doUuTien" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Độ ưu tiên">
+                </div>
+                <div class="col-7">
+                  <div class="row mb-2">
+                    <label class="col-sm-5 col-form-label">Trạng thái</label>
+                    <div class="col-sm-7 text-center align-self-center">
+                      <mat-slide-toggle formControlName="isHienThi"></mat-slide-toggle>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-sm-5 col-form-label">Bài viết mới</label>
+                    <div class="col-sm-7 text-center align-self-center">
+                      <mat-slide-toggle formControlName="isNews"></mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <angular-editor formControlName="noiDung" [placeholder]="'Nhập nội dung mô tả sản phẩm'" [config]="config"></angular-editor>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-main float-end d-flex gap-2">
+                <mat-icon>save_alt</mat-icon>
+                Cập nhật
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

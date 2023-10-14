@@ -14,6 +14,7 @@ import { DownloadComponent } from './modules/download/download.component';
 import { LoginComponent } from './modules/login/login.component';
 import { FormProductComponent } from './modules/form-product/form-product.component';
 import { QuestionsComponent } from './modules/questions/questions.component';
+import { FormNewsComponent } from './modules/form-news/form-news.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,9 @@ const routes: Routes = [
       },
       {
         path: 'bai-viet', component: NewsComponent, data: {name: 'Bài viết', breadcrumb: 'Admin > Bài viết'}
+      },
+      {
+        path: 'bai-viet/them-bai-viet', component: FormNewsComponent, data: {name: 'Thêm bài viết', breadcrumb: 'Admin > Bài Viết > Thêm bài viết'}
       },
       {
         path: 'binh-luan', component: CommentsComponent, data: {name: 'Bình luận', breadcrumb: 'Admin > Bình luận'}

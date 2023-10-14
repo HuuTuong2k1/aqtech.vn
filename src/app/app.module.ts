@@ -45,6 +45,7 @@ import { FormDownloadComponent } from './modules/form-download/form-download.com
 import { FormProductComponent } from './modules/form-product/form-product.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { QuestionsComponent } from './modules/questions/questions.component';
+import { FormNewsComponent } from './modules/form-news/form-news.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { QuestionsComponent } from './modules/questions/questions.component';
     FormDownloadComponent,
     FormProductComponent,
     QuestionsComponent,
+    FormNewsComponent,
   ],
   imports: [
     BrowserModule,

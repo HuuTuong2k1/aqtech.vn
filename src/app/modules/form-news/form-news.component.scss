@@ -1,0 +1,67 @@
+$main-color: #009047;
+$ffff: #ffff;
+
+.news-form-contain {
+
+  .new-form {
+    background-color: $ffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 40px 20px;
+
+    .field-img {
+      padding: 0 12px;
+    }
+
+    input {
+      &::placeholder {
+        font-size: 17px;
+      }
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .btn-main {
+      margin-top: 20px;
+      background-color: $main-color;
+      color: $ffff;
+    }
+
+    .theme {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+
+    .hex {
+      font-weight: 600;
+    }
+
+    .custom-file-button {
+      input[type="file"] {
+        margin-left: -2px !important;
+
+        &::-webkit-file-upload-button {
+          display: none;
+        }
+        &::file-selector-button {
+          display: none;
+        }
+      }
+
+      &:hover {
+        label {
+          background-color: #dde0e3;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -7,10 +7,107 @@
             <span class="title">{{title}}</span>
             <span class="site-map-current">{{breadcrumb}}</span>
           </div>
-          <!-- <button *ngIf="title === 'Header'" class="btn btn-add d-flex" (click)="openFormAddHeader()">
+          <button *ngIf="title === 'Bài viết'" class="btn btn-add d-flex" routerLink="them-bai-viet">
             Thêm mới
             <mat-icon>add</mat-icon>
-          </button> -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row table-contain">
+    <div class="col">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col">
+            <div class="form-header">
+              <span>
+                Quản lý sản phẩm
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid p-0 mt-2">
+        <div class="row">
+          <div class="col">
+            <div class="filter">
+              <mat-form-field>
+                <mat-label>
+                  <mat-icon>search</mat-icon>
+                  Tìm kiếm
+                </mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Nhập nội dung tìm kiếm" #input>
+              </mat-form-field>
+            </div>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataTable">
+                <ng-container matColumnDef="Ưu tiên">
+                  <th mat-header-cell *matHeaderCellDef>Ưu tiên</th>
+                  <td mat-cell *matCellDef="let row, let i = index">{{row.doUuTien}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Tiêu đề">
+                  <th mat-header-cell *matHeaderCellDef>Tiểu đề</th>
+                  <td mat-cell *matCellDef="let row">{{row.tieuDe}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Mô tả ngắn">
+                  <th mat-header-cell *matHeaderCellDef>Mô tả ngắn</th>
+                  <td mat-cell *matCellDef="let row">{{row.tomTat}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Hình đại diện">
+                  <th mat-header-cell *matHeaderCellDef>Ảnh đại diện</th>
+                  <td mat-cell *matCellDef="let row">
+                    <!-- <img src="{{row.hinhDaiDien}}" alt=""> -->
+                    {{row.hinhDaiDien}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Ngày đăng">
+                  <th mat-header-cell *matHeaderCellDef>Ngày đăng</th>
+                  <td mat-cell *matCellDef="let row">{{formatDate(row.createdTime)}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Ngày chỉnh sửa">
+                  <th mat-header-cell *matHeaderCellDef>Ngày hiệu chỉnh</th>
+                  <td mat-cell *matCellDef="let row">{{formatDate(row.ngayHieuChinh)}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Người đăng">
+                  <th mat-header-cell *matHeaderCellDef>Tác giả</th>
+                  <td mat-cell *matCellDef="let row">{{row.createdBy}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Trạng thái">
+                  <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-slide-toggle [checked]="row.isHienThi"></mat-slide-toggle>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Thao tác">
+                  <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+                  <td mat-cell *matCellDef="let row" style="width: 20%;">
+                    <div class="active-btn">
+                      <mat-icon (click)="openFormEdit(row.id)">edit</mat-icon>
+                      <mat-icon (click)="openDialogConfirmDelete(row.id, title)">delete</mat-icon>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="Columns" class="row-title"></tr>
+                <tr mat-row *matRowDef="let row; columns: Columns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell text-center p-4" colspan="7">Không có dữ liệu để hiển thị</td>
+                </tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            </div>
+          </div>
         </div>
       </div>
     </div>
