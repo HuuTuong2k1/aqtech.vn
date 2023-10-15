@@ -6,6 +6,10 @@ import { News } from 'src/app/interfaces/news';
 import { MatPaginator } from '@angular/material/paginator';
 import { NewsService } from 'src/app/services/news.service';
 import { format } from 'date-fns';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { ShareService } from 'src/app/services/share.service';
 
 @Component({
   selector: 'app-news',
@@ -31,8 +35,11 @@ export class NewsComponent implements OnInit{
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private route: Router,
-    private NewService: NewsService
+    private NewService: NewsService,
+    private dialog: MatDialog,
+    private toast: ToastrService,
+    private share: ShareService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +60,22 @@ export class NewsComponent implements OnInit{
   }
 
   openDialogConfirmDelete(id: number, title: string) {
-
+    this.dialog.open(ConfirmDeleteComponent, {
+      data: {
+        id: id,
+        title: title
+      }
+    }).afterClosed().subscribe(result => {
+      this.fetchData()
+    })
   }
 
   openFormEdit(id: number) {
-
+    this.route.navigate(['/bai-viet/hieu-chinh-bai-viet'], {
+      queryParams: {
+        id: id
+      }
+    })
   }
 
   fetchData() {
@@ -65,6 +83,7 @@ export class NewsComponent implements OnInit{
       next: data => {
         this.dataTable = new MatTableDataSource(data)
         this.dataTable.paginator = this.paginator
+        this.share.setData(data)
       },
       error: err => {
         console.log(err)
@@ -75,5 +94,22 @@ export class NewsComponent implements OnInit{
   formatDate(date: string): string {
     const inputDate = new Date(date)
     return format(inputDate, "dd/MM/yyyy HH:mm:ss")
+  }
+
+  changeStatus(newStatus: boolean, data: any) {
+    const date = new Date()
+    date.setHours(date.getHours() + 7)
+    data['isHienThi'] = newStatus
+    data['ngayHieuChinh'] = date.toISOString()
+    console.log(data)
+    this.NewService.putData(data.id, data).subscribe({
+      next: res => {
+        this.toast.success("Thay đổi trạng thái thành công", "Successfully")
+        this.fetchData()
+      },
+      error: err => {
+        this.toast.error("Thay đổi trạng thái không thành công", "Unsuccessfully")
+      }
+    })
   }
 }

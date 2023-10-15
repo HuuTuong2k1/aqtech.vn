@@ -1,4 +1,5 @@
 export interface News {
+  id: number,
   tieuDe: string,
   tomTat: string,
   noiDung: string,

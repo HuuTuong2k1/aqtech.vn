@@ -83,7 +83,7 @@
                 <ng-container matColumnDef="Trạng thái">
                   <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
                   <td mat-cell *matCellDef="let row">
-                    <mat-slide-toggle [checked]="row.isHienThi"></mat-slide-toggle>
+                    <mat-slide-toggle (change)="changeStatus($event.checked, row)" [checked]="row.isHienThi"></mat-slide-toggle>
                   </td>
                 </ng-container>
 

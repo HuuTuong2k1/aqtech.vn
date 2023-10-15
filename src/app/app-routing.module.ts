@@ -51,6 +51,9 @@ const routes: Routes = [
         path: 'bai-viet/them-bai-viet', component: FormNewsComponent, data: {name: 'Thêm bài viết', breadcrumb: 'Admin > Bài Viết > Thêm bài viết'}
       },
       {
+        path: 'bai-viet/hieu-chinh-bai-viet', component: FormNewsComponent, data: {name: 'Hiệu chỉnh bài viết', breadcrumb: 'Admin > Bài Viết > Hiệu chỉnh bài viết'}
+      },
+      {
         path: 'binh-luan', component: CommentsComponent, data: {name: 'Bình luận', breadcrumb: 'Admin > Bình luận'}
       },
       {
@@ -61,6 +64,9 @@ const routes: Routes = [
       },
       {
         path: 'san-pham/them-san-pham', component: FormProductComponent, data : {name: 'Thêm sản phẩm', breadcrumb : 'Admin > Sản phẩm > Thêm sản phẩm'}
+      },
+      {
+        path: 'san-pham/hieu-chinh-san-pham', component: FormProductComponent, data : {name: 'Hiệu chỉnh sản phẩm', breadcrumb : 'Admin > Sản phẩm > Hiệu chỉnh sản phẩm'}
       },
       {
         path: 'tai-khoan-khach-hang', component: AccountComponent, data: {name: 'Tài khoản', breadcrumb: 'Admin > Tài khoản'}

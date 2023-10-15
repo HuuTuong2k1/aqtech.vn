@@ -8,6 +8,7 @@ import { PartnerService } from 'src/app/services/partner.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ProductService } from 'src/app/services/product.service';
 import { QuestionService } from 'src/app/services/question.service';
+import { NewsService } from 'src/app/services/news.service';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -27,7 +28,8 @@ export class ConfirmDeleteComponent implements OnInit{
     private PartnerService: PartnerService,
     private AccountService: AccountService,
     private ProductService: ProductService,
-    private QuestionService: QuestionService
+    private QuestionService: QuestionService,
+    private NewsService: NewsService
   ) {}
 
   ngOnInit(): void {
@@ -130,6 +132,19 @@ export class ConfirmDeleteComponent implements OnInit{
           }
         })
         break;
+      }
+      case 'Bài viết': {
+        this.NewsService.deleteData(id).subscribe({
+          next: res => {
+            this.toast.success("Xóa bài viết thành công", "Successfully")
+            this.dialogRef.close()
+          },
+          error: err => {
+            this.toast.error("Xóa bài viết không thành công", "Unsuccessfully")
+            this.dialogRef.close()
+          }
+        })
+        break
       }
       default: {
         console.log("Ko cos")

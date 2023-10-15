@@ -65,6 +65,7 @@ export class HeaderComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       this.fetchDataHeader();
     });
+
   }
 
   openDialogConfirmDelete(id: number, title: string) {
